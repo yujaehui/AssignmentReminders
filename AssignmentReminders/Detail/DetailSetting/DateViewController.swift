@@ -25,7 +25,7 @@ class DateViewController: BaseViewController {
     
     override func configureView() {
         datePicker.preferredDatePickerStyle = .inline
-        datePicker.datePickerMode = .date
+        datePicker.datePickerMode = .dateAndTime
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.minimumDate = Date()

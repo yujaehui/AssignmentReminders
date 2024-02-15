@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RealmSwift
 
 enum SectionType: String, CaseIterable {
     case Essential
@@ -20,40 +21,42 @@ enum EssentialCellType: String, CaseIterable {
 
 enum AdditionalCellType: String, CaseIterable {
     case Date
-    case Time
     case Tag
+    case Flag
     case Priority
     
     var image: UIImage {
         switch self {
         case .Date:
             UIImage(systemName: "calendar.circle.fill")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
-        case .Time:
-            UIImage(systemName: "clock.circle.fill")!.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
         case .Tag:
             UIImage(systemName: "number.circle.fill")!.withTintColor(.darkGray, renderingMode: .alwaysOriginal)
-        
+        case .Flag:
+            UIImage(systemName: "flag.circle.fill")!.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
         case .Priority:
-            UIImage(systemName: "exclamationmark.circle.fill")!.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
+            UIImage(systemName: "exclamationmark.circle.fill")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
         }
     }
-}
-
-protocol passDataDelegate {
-    func passTimeData(time: Date)
 }
 
 class DetailViewController: BaseViewController {
     let detailTableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    var listTitle = ""
-    var listNotes = ""
-    var date = ""
-    var time = ""
-    var tag = ""
-    var priority = ""
-    
-    var list: ((List) -> Void)?
+    var listTitle = "" {
+        didSet {
+            if listTitle.isEmpty {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            } else {
+                navigationItem.rightBarButtonItem?.isEnabled = true
+            }
+        }
+    }
+    var listNotes: String?
+    var date: Date?
+    var dateString = ""
+    var tag: String?
+    var flag = false
+    var priority: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +75,7 @@ class DetailViewController: BaseViewController {
         detailTableView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
         detailTableView.register(NotesTableViewCell.self, forCellReuseIdentifier: NotesTableViewCell.identifier)
         detailTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
-        detailTableView.register(TimeTableViewCell.self, forCellReuseIdentifier: TimeTableViewCell.identifier)
+        detailTableView.register(FlagTableViewCell.self, forCellReuseIdentifier: FlagTableViewCell.identifier)
         detailTableView.register(TagTableViewCell.self, forCellReuseIdentifier: TagTableViewCell.identifier)
         detailTableView.register(PriorityTableViewCell.self, forCellReuseIdentifier: PriorityTableViewCell.identifier)
         detailTableView.rowHeight = UITableView.automaticDimension
@@ -88,24 +91,32 @@ class DetailViewController: BaseViewController {
         navigationItem.title = "Detail"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(leftBarButtonClicked))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(rightBarButtonClicked))
+        if listTitle.isEmpty {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        }
     }
     
     @objc func leftBarButtonClicked() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func rightBarButtonClicked() {
-        list?(List(title: listTitle, notes: listNotes, date: date, time: time, tag: tag, priority: priority))
-        dismiss(animated: true)
+        let realm = try! Realm()
+        let data = Reminder(title: listTitle, notes: nil, date: date, tag: tag, flag: flag, priority: priority, isCompleted: false, isClosed: nil, CreationDate: Date())
+        try! realm.write {
+            realm.add(data)
+        }
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func tagNotification(notification: NSNotification) {
-        let firstTag = notification.userInfo?["tag"] as? String
-        guard let tagCount = notification.userInfo?["count"] as? Int else { return }
-        if tagCount == 0 {
-            tag = "#" + (firstTag ?? "")
+        guard let tagList = notification.userInfo?["tagList"] as? [String] else { return }
+        if tagList.count == 1 {
+            tag = "#" + (tagList.first ?? "")
         } else {
-            tag = "#" + (firstTag ?? "") + "외 \(String(describing: tagCount))개의 tag"
+            tag = "#" + (tagList.first ?? "") + "외 \(String(describing: tagList.count-1))개의 tag"
         }
         detailTableView.reloadData()
     }
@@ -114,21 +125,14 @@ class DetailViewController: BaseViewController {
         print(#function)
         let vc = DateViewController()
         vc.date = { [self] value in
+            date = value
             let format = DateFormatter()
-            format.dateFormat = "yyyy년 MM월 dd일 E요일"
+            format.dateFormat = "yyyy. MM. dd a h:mm"
             format.locale = Locale(identifier: "ko-KR")
             let result = format.string(from: value)
-            date = result
+            dateString = result
             detailTableView.reloadData()
         }
-        let nav = UINavigationController(rootViewController: vc)
-        present(nav, animated: true)
-    }
-    
-    @objc func timeSetting() {
-        print(#function)
-        let vc = TimeViewController()
-        vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
     }
@@ -177,15 +181,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier, for: indexPath) as! DateTableViewCell
                 cell.iconImageView.image = AdditionalCellType.Date.image
                 cell.targetLabel.text = AdditionalCellType.Date.rawValue
-                cell.settingLabel.text = date
+                cell.settingLabel.text = dateString
                 cell.settingButton.addTarget(self, action: #selector(dateSetting), for: .touchUpInside)
-                return cell
-            case .Time:
-                let cell = tableView.dequeueReusableCell(withIdentifier: TimeTableViewCell.identifier, for: indexPath) as! TimeTableViewCell
-                cell.iconImageView.image = AdditionalCellType.Time.image
-                cell.targetLabel.text = AdditionalCellType.Time.rawValue
-                cell.settingLabel.text = time
-                cell.settingButton.addTarget(self, action: #selector(timeSetting), for: .touchUpInside)
                 return cell
             case .Tag:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TagTableViewCell.identifier, for: indexPath) as! TagTableViewCell
@@ -193,6 +190,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.targetLabel.text = AdditionalCellType.Tag.rawValue
                 cell.settingButton.addTarget(self, action: #selector(tagSetting), for: .touchUpInside)
                 cell.settingLabel.text = tag
+                return cell
+            case .Flag:
+                let cell = tableView.dequeueReusableCell(withIdentifier: FlagTableViewCell.identifier, for: indexPath) as! FlagTableViewCell
+                cell.iconImageView.image = AdditionalCellType.Flag.image
+                cell.targetLabel.text = AdditionalCellType.Flag.rawValue
+                cell.flag = { value in
+                    self.flag = value
+                }
                 return cell
             case .Priority:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PriorityTableViewCell.identifier, for: indexPath) as! PriorityTableViewCell
@@ -204,17 +209,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
         }
-    }
-}
-
-extension DetailViewController: passDataDelegate {
-    func passTimeData(time: Date) {
-        let format = DateFormatter()
-        format.dateFormat = "a h:mm"
-        format.locale = Locale(identifier: "ko-KR")
-        let result = format.string(from: time)
-        self.time = result
-        self.detailTableView.reloadData()
     }
 }
 

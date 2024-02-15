@@ -14,6 +14,8 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
     let tagListView = TagListView()
     let tagTextField = UITextField()
     
+    var tagList: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGroupedBackground
@@ -70,7 +72,7 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
     }
     
     @objc func rightBarButtonClicked() {
-        NotificationCenter.default.post(name: NSNotification.Name("Tag"), object: nil, userInfo: ["tag":tagListView.tagViews.first?.currentTitle as Any, "count":tagListView.tagViews.count-1])
+        NotificationCenter.default.post(name: NSNotification.Name("Tag"), object: nil, userInfo: ["tagList":tagList])
         dismiss(animated: true)
     }
     
@@ -82,6 +84,8 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
             } else if text.isEmpty == false {
                 tagListView.removeTag(text)
                 tagListView.insertTag(text, at: 0)
+                tagList.removeAll { $0 == text }
+                tagList.insert(text, at: 0)
             }
             textField.text = nil
             navigationItem.rightBarButtonItem?.isEnabled = true

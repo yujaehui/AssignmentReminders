@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TitleTableViewCell: BaseTableViewCell, UITextFieldDelegate {
+class TitleTableViewCell: BaseTableViewCell {
     let userTextField = UITextField()
     var listTitle: ((String) -> Void)?
     
@@ -16,7 +16,7 @@ class TitleTableViewCell: BaseTableViewCell, UITextFieldDelegate {
     }
     
     override func configureView() {
-        userTextField.delegate = self
+        userTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
     }
     
     override func configureConstraints() {
@@ -26,9 +26,8 @@ class TitleTableViewCell: BaseTableViewCell, UITextFieldDelegate {
         }
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return false }
+    @objc func textFieldEditingChanged() {
+        guard let text = userTextField.text else { return }
         listTitle?(text)
-        return true
     }
 }

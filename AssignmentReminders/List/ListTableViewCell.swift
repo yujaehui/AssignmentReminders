@@ -12,11 +12,13 @@ class ListTableViewCell: BaseTableViewCell {
     let titleLabel = UILabel()
     let notesLabel = UILabel()
     let descriptionLabel = UILabel()
+    let flagImageView = UIImageView()
     
     override func configureHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(notesLabel)
         contentView.addSubview(descriptionLabel)
+        contentView.addSubview(flagImageView)
     }
     
     override func configureView() {
@@ -24,6 +26,8 @@ class ListTableViewCell: BaseTableViewCell {
         notesLabel.font = .systemFont(ofSize: 14)
         descriptionLabel.textColor = .gray
         descriptionLabel.font = .systemFont(ofSize: 14)
+        flagImageView.image = UIImage(systemName: "flag.fill")
+        flagImageView.tintColor = .systemOrange
     }
     
     override func configureConstraints() {
@@ -40,6 +44,12 @@ class ListTableViewCell: BaseTableViewCell {
             make.top.equalTo(notesLabel.snp.bottom).offset(5)
             make.leading.equalTo(contentView).inset(10)
             make.bottom.equalTo(contentView).inset(10)
+        }
+        
+        flagImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(contentView)
+            make.trailing.equalTo(contentView).inset(10)
+            make.size.equalTo(20)
         }
     }
 

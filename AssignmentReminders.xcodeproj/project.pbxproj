@@ -32,6 +32,13 @@
 		09535A232B7CEF0100CC8B3C /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A222B7CEF0100CC8B3C /* TimeTableViewCell.swift */; };
 		09535A252B7CF0E900CC8B3C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A242B7CF0E900CC8B3C /* ListTableViewCell.swift */; };
 		09535A272B7CF70300CC8B3C /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A262B7CF70300CC8B3C /* NotesTableViewCell.swift */; };
+		099F612E2B7DF52700330A8E /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F612D2B7DF52700330A8E /* Realm.swift */; };
+		099F61312B7DF59C00330A8E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 099F61302B7DF59C00330A8E /* Realm */; };
+		099F61332B7DF59C00330A8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 099F61322B7DF59C00330A8E /* RealmSwift */; };
+		099F61352B7DFC0100330A8E /* FlagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */; };
+		099F61382B7E165B00330A8E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61372B7E165B00330A8E /* MainViewController.swift */; };
+		099F613C2B7E17D900330A8E /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */; };
+		099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F613D2B7E17E800330A8E /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +65,11 @@
 		09535A222B7CEF0100CC8B3C /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		09535A242B7CF0E900CC8B3C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		09535A262B7CF70300CC8B3C /* NotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
+		099F612D2B7DF52700330A8E /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagTableViewCell.swift; sourceTree = "<group>"; };
+		099F61372B7E165B00330A8E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		099F613D2B7E17E800330A8E /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,10 +77,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				099F61332B7DF59C00330A8E /* RealmSwift in Frameworks */,
 				09535A082B7C723000CC8B3C /* SnapKit in Frameworks */,
 				09535A052B7C722600CC8B3C /* Toast in Frameworks */,
 				09535A1D2B7CBBD500CC8B3C /* TagListView in Frameworks */,
 				09535A022B7C722100CC8B3C /* FSCalendar in Frameworks */,
+				099F61312B7DF59C00330A8E /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +108,8 @@
 		095359E22B7C712E00CC8B3C /* AssignmentReminders */ = {
 			isa = PBXGroup;
 			children = (
+				099F61362B7E164F00330A8E /* Main */,
+				099F612C2B7DF51C00330A8E /* Realm */,
 				095359FD2B7C719300CC8B3C /* Base */,
 				095359F72B7C713400CC8B3C /* List */,
 				095359FA2B7C716D00CC8B3C /* Detail */,
@@ -127,6 +143,7 @@
 				09535A202B7CEEA200CC8B3C /* DateTableViewCell.swift */,
 				09535A222B7CEF0100CC8B3C /* TimeTableViewCell.swift */,
 				09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */,
+				099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */,
 				09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */,
 				09535A142B7C951400CC8B3C /* DetailSetting */,
 			);
@@ -138,6 +155,7 @@
 			children = (
 				095359FE2B7C719A00CC8B3C /* BaseViewController.swift */,
 				09535A0B2B7C776500CC8B3C /* BaseTableViewCell.swift */,
+				099F613D2B7E17E800330A8E /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -158,6 +176,23 @@
 				09535A172B7CA2ED00CC8B3C /* TagViewController.swift */,
 			);
 			path = DetailSetting;
+			sourceTree = "<group>";
+		};
+		099F612C2B7DF51C00330A8E /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				099F612D2B7DF52700330A8E /* Realm.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		099F61362B7E164F00330A8E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				099F61372B7E165B00330A8E /* MainViewController.swift */,
+				099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +216,8 @@
 				09535A042B7C722600CC8B3C /* Toast */,
 				09535A072B7C723000CC8B3C /* SnapKit */,
 				09535A1C2B7CBBD500CC8B3C /* TagListView */,
+				099F61302B7DF59C00330A8E /* Realm */,
+				099F61322B7DF59C00330A8E /* RealmSwift */,
 			);
 			productName = AssignmentReminders;
 			productReference = 095359E02B7C712E00CC8B3C /* AssignmentReminders.app */;
@@ -215,6 +252,7 @@
 				09535A032B7C722600CC8B3C /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				09535A062B7C723000CC8B3C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				09535A1B2B7CBBD500CC8B3C /* XCRemoteSwiftPackageReference "TagListView" */,
+				099F612F2B7DF59C00330A8E /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 095359E12B7C712E00CC8B3C /* Products */;
 			projectDirPath = "";
@@ -244,7 +282,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				09535A212B7CEEA200CC8B3C /* DateTableViewCell.swift in Sources */,
+				099F61382B7E165B00330A8E /* MainViewController.swift in Sources */,
 				09535A0C2B7C776500CC8B3C /* BaseTableViewCell.swift in Sources */,
+				099F61352B7DFC0100330A8E /* FlagTableViewCell.swift in Sources */,
 				095359E82B7C712E00CC8B3C /* ViewController.swift in Sources */,
 				09535A112B7C7EB500CC8B3C /* TagTableViewCell.swift in Sources */,
 				09535A232B7CEF0100CC8B3C /* TimeTableViewCell.swift in Sources */,
@@ -257,7 +297,10 @@
 				095359F92B7C715F00CC8B3C /* ListViewController.swift in Sources */,
 				095359E62B7C712E00CC8B3C /* SceneDelegate.swift in Sources */,
 				09535A182B7CA2ED00CC8B3C /* TagViewController.swift in Sources */,
+				099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */,
+				099F612E2B7DF52700330A8E /* Realm.swift in Sources */,
 				09535A1A2B7CB5D000CC8B3C /* TimeViewController.swift in Sources */,
+				099F613C2B7E17D900330A8E /* MainCollectionViewCell.swift in Sources */,
 				095359FF2B7C719A00CC8B3C /* BaseViewController.swift in Sources */,
 				09535A162B7C952C00CC8B3C /* DateViewController.swift in Sources */,
 				09535A272B7CF70300CC8B3C /* NotesTableViewCell.swift in Sources */,
@@ -515,6 +558,14 @@
 				minimumVersion = 1.4.1;
 			};
 		};
+		099F612F2B7DF59C00330A8E /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.47.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -537,6 +588,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 09535A1B2B7CBBD500CC8B3C /* XCRemoteSwiftPackageReference "TagListView" */;
 			productName = TagListView;
+		};
+		099F61302B7DF59C00330A8E /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 099F612F2B7DF59C00330A8E /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		099F61322B7DF59C00330A8E /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 099F612F2B7DF59C00330A8E /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

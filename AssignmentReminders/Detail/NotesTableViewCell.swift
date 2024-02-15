@@ -7,16 +7,16 @@
 
 import UIKit
 
-class NotesTableViewCell: BaseTableViewCell, UITextFieldDelegate {
+class NotesTableViewCell: BaseTableViewCell {
     let userTextField = UITextField()
-    var listNotes: ((String) -> Void)?
-
+    var listNotes: ((String?) -> Void)?
+    
     override func configureHierarchy() {
         contentView.addSubview(userTextField)
     }
     
     override func configureView() {
-        userTextField.delegate = self
+        userTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
     }
     
     override func configureConstraints() {
@@ -26,9 +26,7 @@ class NotesTableViewCell: BaseTableViewCell, UITextFieldDelegate {
         }
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let text = textField.text else { return false }
-        listNotes?(text)
-        return true
+    @objc func textFieldEditingChanged() {
+        listNotes?(userTextField.text)
     }
 }

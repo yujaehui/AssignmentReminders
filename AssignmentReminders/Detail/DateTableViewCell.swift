@@ -24,7 +24,6 @@ class DateTableViewCell: BaseTableViewCell {
         settingLabel.textAlignment = .right
         settingLabel.textColor = .systemBlue
         settingLabel.font = .systemFont(ofSize: 15)
-        settingButton.setTitle("", for: .normal)
         settingButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         settingButton.contentHorizontalAlignment = .trailing
     }

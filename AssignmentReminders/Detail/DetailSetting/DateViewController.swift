@@ -14,9 +14,7 @@ class DateViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGroupedBackground
         setNavigationBar()
-        print("date")
     }
     
     override func configureHierarchy() {
@@ -26,9 +24,8 @@ class DateViewController: BaseViewController {
     override func configureView() {
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .dateAndTime
-        datePicker.locale = Locale(identifier: "ko-KR")
-        datePicker.timeZone = .autoupdatingCurrent
-        datePicker.minimumDate = Date()
+        datePicker.locale = Locale(identifier: "ko_KR")
+        datePicker.timeZone = TimeZone(identifier: "Asia/Seoul")!
     }
     
     override func configureConstraints() {
@@ -39,15 +36,15 @@ class DateViewController: BaseViewController {
     
     func setNavigationBar() {
         navigationItem.title = "Date"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(leftBarButtonClicked))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(rightBarButtonClicked))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonClicked))
     }
     
-    @objc func leftBarButtonClicked() {
+    @objc func cancelButtonClicked() {
         dismiss(animated: true)
     }
     
-    @objc func rightBarButtonClicked() {
+    @objc func saveButtonClicked() {
         date?(datePicker.date)
         dismiss(animated: true)
     }

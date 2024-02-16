@@ -19,26 +19,25 @@
 		09535A022B7C722100CC8B3C /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 09535A012B7C722100CC8B3C /* FSCalendar */; };
 		09535A052B7C722600CC8B3C /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 09535A042B7C722600CC8B3C /* Toast */; };
 		09535A082B7C723000CC8B3C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 09535A072B7C723000CC8B3C /* SnapKit */; };
-		09535A0A2B7C775300CC8B3C /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A092B7C775300CC8B3C /* TitleTableViewCell.swift */; };
 		09535A0C2B7C776500CC8B3C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A0B2B7C776500CC8B3C /* BaseTableViewCell.swift */; };
 		09535A0F2B7C7C9C00CC8B3C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A0E2B7C7C9C00CC8B3C /* UIView+Extension.swift */; };
 		09535A112B7C7EB500CC8B3C /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */; };
 		09535A162B7C952C00CC8B3C /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A152B7C952C00CC8B3C /* DateViewController.swift */; };
 		09535A182B7CA2ED00CC8B3C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A172B7CA2ED00CC8B3C /* TagViewController.swift */; };
-		09535A1A2B7CB5D000CC8B3C /* TimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A192B7CB5D000CC8B3C /* TimeViewController.swift */; };
 		09535A1D2B7CBBD500CC8B3C /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = 09535A1C2B7CBBD500CC8B3C /* TagListView */; };
 		09535A1F2B7CCD9100CC8B3C /* PriorityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */; };
 		09535A212B7CEEA200CC8B3C /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A202B7CEEA200CC8B3C /* DateTableViewCell.swift */; };
-		09535A232B7CEF0100CC8B3C /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A222B7CEF0100CC8B3C /* TimeTableViewCell.swift */; };
 		09535A252B7CF0E900CC8B3C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A242B7CF0E900CC8B3C /* ListTableViewCell.swift */; };
-		09535A272B7CF70300CC8B3C /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A262B7CF70300CC8B3C /* NotesTableViewCell.swift */; };
-		099F612E2B7DF52700330A8E /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F612D2B7DF52700330A8E /* Realm.swift */; };
+		099F612E2B7DF52700330A8E /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F612D2B7DF52700330A8E /* Reminder.swift */; };
 		099F61312B7DF59C00330A8E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 099F61302B7DF59C00330A8E /* Realm */; };
 		099F61332B7DF59C00330A8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 099F61322B7DF59C00330A8E /* RealmSwift */; };
 		099F61352B7DFC0100330A8E /* FlagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */; };
 		099F61382B7E165B00330A8E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61372B7E165B00330A8E /* MainViewController.swift */; };
 		099F613C2B7E17D900330A8E /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */; };
 		099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F613D2B7E17E800330A8E /* BaseCollectionViewCell.swift */; };
+		099F61422B7EF5A500330A8E /* ReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61412B7EF5A500330A8E /* ReminderRepository.swift */; };
+		099F61442B7FA74500330A8E /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61432B7FA74500330A8E /* Utility.swift */; };
+		099F61462B7FB6C000330A8E /* EssentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,23 +52,22 @@
 		095359F82B7C715F00CC8B3C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		095359FB2B7C717600CC8B3C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		095359FE2B7C719A00CC8B3C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		09535A092B7C775300CC8B3C /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		09535A0B2B7C776500CC8B3C /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		09535A0E2B7C7C9C00CC8B3C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		09535A152B7C952C00CC8B3C /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		09535A172B7CA2ED00CC8B3C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
-		09535A192B7CB5D000CC8B3C /* TimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeViewController.swift; sourceTree = "<group>"; };
 		09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityTableViewCell.swift; sourceTree = "<group>"; };
 		09535A202B7CEEA200CC8B3C /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
-		09535A222B7CEF0100CC8B3C /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		09535A242B7CF0E900CC8B3C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
-		09535A262B7CF70300CC8B3C /* NotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
-		099F612D2B7DF52700330A8E /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		099F612D2B7DF52700330A8E /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagTableViewCell.swift; sourceTree = "<group>"; };
 		099F61372B7E165B00330A8E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		099F613D2B7E17E800330A8E /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		099F61412B7EF5A500330A8E /* ReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRepository.swift; sourceTree = "<group>"; };
+		099F61432B7FA74500330A8E /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +115,7 @@
 				095359E32B7C712E00CC8B3C /* AppDelegate.swift */,
 				095359E52B7C712E00CC8B3C /* SceneDelegate.swift */,
 				095359E72B7C712E00CC8B3C /* ViewController.swift */,
+				099F61432B7FA74500330A8E /* Utility.swift */,
 				095359E92B7C712E00CC8B3C /* Main.storyboard */,
 				095359EC2B7C712F00CC8B3C /* Assets.xcassets */,
 				095359EE2B7C712F00CC8B3C /* LaunchScreen.storyboard */,
@@ -138,10 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				095359FB2B7C717600CC8B3C /* DetailViewController.swift */,
-				09535A092B7C775300CC8B3C /* TitleTableViewCell.swift */,
-				09535A262B7CF70300CC8B3C /* NotesTableViewCell.swift */,
+				099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */,
 				09535A202B7CEEA200CC8B3C /* DateTableViewCell.swift */,
-				09535A222B7CEF0100CC8B3C /* TimeTableViewCell.swift */,
 				09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */,
 				099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */,
 				09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */,
@@ -172,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				09535A152B7C952C00CC8B3C /* DateViewController.swift */,
-				09535A192B7CB5D000CC8B3C /* TimeViewController.swift */,
 				09535A172B7CA2ED00CC8B3C /* TagViewController.swift */,
 			);
 			path = DetailSetting;
@@ -181,7 +177,8 @@
 		099F612C2B7DF51C00330A8E /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				099F612D2B7DF52700330A8E /* Realm.swift */,
+				099F612D2B7DF52700330A8E /* Reminder.swift */,
+				099F61412B7EF5A500330A8E /* ReminderRepository.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -282,28 +279,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				09535A212B7CEEA200CC8B3C /* DateTableViewCell.swift in Sources */,
+				099F61422B7EF5A500330A8E /* ReminderRepository.swift in Sources */,
 				099F61382B7E165B00330A8E /* MainViewController.swift in Sources */,
 				09535A0C2B7C776500CC8B3C /* BaseTableViewCell.swift in Sources */,
 				099F61352B7DFC0100330A8E /* FlagTableViewCell.swift in Sources */,
 				095359E82B7C712E00CC8B3C /* ViewController.swift in Sources */,
 				09535A112B7C7EB500CC8B3C /* TagTableViewCell.swift in Sources */,
-				09535A232B7CEF0100CC8B3C /* TimeTableViewCell.swift in Sources */,
 				09535A252B7CF0E900CC8B3C /* ListTableViewCell.swift in Sources */,
 				095359E42B7C712E00CC8B3C /* AppDelegate.swift in Sources */,
+				099F61442B7FA74500330A8E /* Utility.swift in Sources */,
 				09535A0F2B7C7C9C00CC8B3C /* UIView+Extension.swift in Sources */,
 				09535A1F2B7CCD9100CC8B3C /* PriorityTableViewCell.swift in Sources */,
 				095359FC2B7C717600CC8B3C /* DetailViewController.swift in Sources */,
-				09535A0A2B7C775300CC8B3C /* TitleTableViewCell.swift in Sources */,
 				095359F92B7C715F00CC8B3C /* ListViewController.swift in Sources */,
 				095359E62B7C712E00CC8B3C /* SceneDelegate.swift in Sources */,
 				09535A182B7CA2ED00CC8B3C /* TagViewController.swift in Sources */,
 				099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */,
-				099F612E2B7DF52700330A8E /* Realm.swift in Sources */,
-				09535A1A2B7CB5D000CC8B3C /* TimeViewController.swift in Sources */,
+				099F61462B7FB6C000330A8E /* EssentialTableViewCell.swift in Sources */,
+				099F612E2B7DF52700330A8E /* Reminder.swift in Sources */,
 				099F613C2B7E17D900330A8E /* MainCollectionViewCell.swift in Sources */,
 				095359FF2B7C719A00CC8B3C /* BaseViewController.swift in Sources */,
 				09535A162B7C952C00CC8B3C /* DateViewController.swift in Sources */,
-				09535A272B7CF70300CC8B3C /* NotesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

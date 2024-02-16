@@ -26,13 +26,17 @@ class PriorityTableViewCell: BaseTableViewCell {
         settingLabel.textAlignment = .right
         settingLabel.textColor = .systemBlue
         settingLabel.font = .systemFont(ofSize: 15)
-        settingButton.setTitle("", for: .normal)
         settingButton.setImage(UIImage(systemName: "chevron.up.chevron.down"), for: .normal)
         settingButton.contentHorizontalAlignment = .trailing
         settingButton.addTarget(self, action: #selector(settingButtonClicked), for: .touchUpInside)
     }
     
     @objc func settingButtonClicked() {
+        settingButton.menu = setMenu()
+        settingButton.showsMenuAsPrimaryAction = true
+    }
+    
+    func setMenu() -> UIMenu {
         let noneButton = UIAction(title: "없음") { _ in
             self.settingLabel.text = "없음"
             self.priority?("")
@@ -52,8 +56,7 @@ class PriorityTableViewCell: BaseTableViewCell {
         }
         let items = [noneButton, highButton, middleButton, lowButton]
         let menu = UIMenu(title: "", children: items)
-        settingButton.menu = menu
-        settingButton.showsMenuAsPrimaryAction = true
+        return menu
     }
     
     override func configureConstraints() {

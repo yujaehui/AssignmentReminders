@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import RealmSwift
+import Toast
 
 enum SectionType: String, CaseIterable {
     case Essential
@@ -42,15 +43,7 @@ enum AdditionalCellType: String, CaseIterable {
 class DetailViewController: BaseViewController {
     let detailTableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    var listTitle = "" {
-        didSet {
-            if listTitle.isEmpty {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-            } else {
-                navigationItem.rightBarButtonItem?.isEnabled = true
-            }
-        }
-    }
+    var listTitle = ""
     var listNotes: String?
     var date: Date?
     var dateString = ""
@@ -58,9 +51,10 @@ class DetailViewController: BaseViewController {
     var flag = false
     var priority: String?
     
+    let repository = ReminderRepository()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGroupedBackground
         setNavigationBar()
         NotificationCenter.default.addObserver(self, selector: #selector(tagNotification), name: NSNotification.Name("Tag"), object: nil)
     }
@@ -72,8 +66,7 @@ class DetailViewController: BaseViewController {
     override func configureView() {
         detailTableView.dataSource = self
         detailTableView.delegate = self
-        detailTableView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
-        detailTableView.register(NotesTableViewCell.self, forCellReuseIdentifier: NotesTableViewCell.identifier)
+        detailTableView.register(EssentialTableViewCell.self, forCellReuseIdentifier: EssentialTableViewCell.identifier)
         detailTableView.register(DateTableViewCell.self, forCellReuseIdentifier: DateTableViewCell.identifier)
         detailTableView.register(FlagTableViewCell.self, forCellReuseIdentifier: FlagTableViewCell.identifier)
         detailTableView.register(TagTableViewCell.self, forCellReuseIdentifier: TagTableViewCell.identifier)
@@ -89,26 +82,22 @@ class DetailViewController: BaseViewController {
     
     func setNavigationBar() {
         navigationItem.title = "Detail"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(leftBarButtonClicked))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(rightBarButtonClicked))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButtonClicked))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonClicked))
+    }
+    
+    @objc func cancelButtonClicked() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func saveButtonClicked() {
         if listTitle.isEmpty {
-            navigationItem.rightBarButtonItem?.isEnabled = false
+            view.makeToast("Title을 입력해주세요", position: .bottom)
         } else {
-            navigationItem.rightBarButtonItem?.isEnabled = true
+            let data = Reminder(title: listTitle, notes: listNotes, date: date, tag: tag, flag: flag, priority: priority, isCompleted: false, isClosed: nil, CreationDate: Date())
+            repository.createItem(data)
+            navigationController?.popViewController(animated: true)
         }
-    }
-    
-    @objc func leftBarButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func rightBarButtonClicked() {
-        let realm = try! Realm()
-        let data = Reminder(title: listTitle, notes: nil, date: date, tag: tag, flag: flag, priority: priority, isCompleted: false, isClosed: nil, CreationDate: Date())
-        try! realm.write {
-            realm.add(data)
-        }
-        navigationController?.popViewController(animated: true)
     }
     
     @objc func tagNotification(notification: NSNotification) {
@@ -126,11 +115,7 @@ class DetailViewController: BaseViewController {
         let vc = DateViewController()
         vc.date = { [self] value in
             date = value
-            let format = DateFormatter()
-            format.dateFormat = "yyyy. MM. dd a h:mm"
-            format.locale = Locale(identifier: "ko-KR")
-            let result = format.string(from: value)
-            dateString = result
+            dateString = Utility.shared.dateFormatter(date: value)
             detailTableView.reloadData()
         }
         let nav = UINavigationController(rootViewController: vc)
@@ -161,18 +146,22 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         case .Essential:
             switch EssentialCellType.allCases[indexPath.row] {
             case .Title:
-                let cell = tableView.dequeueReusableCell(withIdentifier: TitleTableViewCell.identifier, for: indexPath) as! TitleTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: EssentialTableViewCell.identifier, for: indexPath) as! EssentialTableViewCell
                 cell.userTextField.placeholder = EssentialCellType.Title.rawValue
+                cell.type = EssentialCellType.Title
                 cell.listTitle = { value in
                     self.listTitle = value
                 }                
+                cell.selectionStyle = .none
                 return cell
             case .Notes:
-                let cell = tableView.dequeueReusableCell(withIdentifier: NotesTableViewCell.identifier, for: indexPath) as! NotesTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: EssentialTableViewCell.identifier, for: indexPath) as! EssentialTableViewCell
                 cell.userTextField.placeholder = EssentialCellType.Notes.rawValue
+                cell.type = EssentialCellType.Notes
                 cell.listNotes = { value in
                     self.listNotes = value
                 }
+                cell.selectionStyle = .none
                 return cell
             }
         case .Additional:
@@ -181,8 +170,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.identifier, for: indexPath) as! DateTableViewCell
                 cell.iconImageView.image = AdditionalCellType.Date.image
                 cell.targetLabel.text = AdditionalCellType.Date.rawValue
-                cell.settingLabel.text = dateString
                 cell.settingButton.addTarget(self, action: #selector(dateSetting), for: .touchUpInside)
+                cell.settingLabel.text = dateString
+                cell.selectionStyle = .none
                 return cell
             case .Tag:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TagTableViewCell.identifier, for: indexPath) as! TagTableViewCell
@@ -190,6 +180,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.targetLabel.text = AdditionalCellType.Tag.rawValue
                 cell.settingButton.addTarget(self, action: #selector(tagSetting), for: .touchUpInside)
                 cell.settingLabel.text = tag
+                cell.selectionStyle = .none
                 return cell
             case .Flag:
                 let cell = tableView.dequeueReusableCell(withIdentifier: FlagTableViewCell.identifier, for: indexPath) as! FlagTableViewCell
@@ -198,6 +189,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.flag = { value in
                     self.flag = value
                 }
+                cell.selectionStyle = .none
                 return cell
             case .Priority:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PriorityTableViewCell.identifier, for: indexPath) as! PriorityTableViewCell
@@ -206,6 +198,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.priority = { value in
                     self.priority = value
                 }
+                cell.selectionStyle = .none
                 return cell
             }
         }

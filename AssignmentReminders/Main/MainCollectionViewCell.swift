@@ -21,12 +21,8 @@ class MainCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         layer.cornerRadius = 15
-        backgroundColor = .white
-        iconimageView.image = UIImage(systemName: "tray.circle.fill")
-        countLabel.text = "0"
         countLabel.textAlignment = .center
         countLabel.font = .boldSystemFont(ofSize: 25)
-        titleLabel.text = "전체"
         titleLabel.textColor = .gray
         titleLabel.font = .boldSystemFont(ofSize: 16)
     }
@@ -48,4 +44,9 @@ class MainCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
+    func configureCell(row: MainCellType) {
+        iconimageView.image = row.image
+        iconimageView.tintColor = row.color
+        titleLabel.text = row.rawValue
+    }
 }

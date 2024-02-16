@@ -1,15 +1,17 @@
 //
-//  TitleTableViewCell.swift
+//  EssentialTableViewCell.swift
 //  AssignmentReminders
 //
-//  Created by Jaehui Yu on 2/14/24.
+//  Created by Jaehui Yu on 2/17/24.
 //
 
 import UIKit
 
-class TitleTableViewCell: BaseTableViewCell {
+class EssentialTableViewCell: BaseTableViewCell {
     let userTextField = UITextField()
+    var type: EssentialCellType = .Title
     var listTitle: ((String) -> Void)?
+    var listNotes: ((String) -> Void)?
     
     override func configureHierarchy() {
         contentView.addSubview(userTextField)
@@ -28,6 +30,11 @@ class TitleTableViewCell: BaseTableViewCell {
     
     @objc func textFieldEditingChanged() {
         guard let text = userTextField.text else { return }
-        listTitle?(text)
+        switch type {
+        case .Title:
+            listTitle?(text)
+        case .Notes:
+            listNotes?(text)
+        }
     }
 }

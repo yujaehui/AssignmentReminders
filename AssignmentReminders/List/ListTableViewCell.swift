@@ -9,12 +9,14 @@ import UIKit
 import SnapKit
 
 class ListTableViewCell: BaseTableViewCell {
+    let completeButton = UIButton()
     let titleLabel = UILabel()
     let notesLabel = UILabel()
     let descriptionLabel = UILabel()
     let flagImageView = UIImageView()
     
     override func configureHierarchy() {
+        contentView.addSubview(completeButton)
         contentView.addSubview(titleLabel)
         contentView.addSubview(notesLabel)
         contentView.addSubview(descriptionLabel)
@@ -31,18 +33,24 @@ class ListTableViewCell: BaseTableViewCell {
     }
     
     override func configureConstraints() {
-        titleLabel.snp.makeConstraints { make in
+        completeButton.snp.makeConstraints { make in
             make.top.leading.equalTo(contentView).inset(10)
+            make.size.equalTo(20)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentView).inset(10)
+            make.leading.equalTo(completeButton.snp.trailing).offset(10)
         }
         
         notesLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
-            make.leading.equalTo(contentView).inset(10)
+            make.leading.equalTo(completeButton.snp.trailing).offset(10)
         }
         
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(notesLabel.snp.bottom).offset(5)
-            make.leading.equalTo(contentView).inset(10)
+            make.leading.equalTo(completeButton.snp.trailing).offset(10)
             make.bottom.equalTo(contentView).inset(10)
         }
         
@@ -50,6 +58,36 @@ class ListTableViewCell: BaseTableViewCell {
             make.centerY.equalTo(contentView)
             make.trailing.equalTo(contentView).inset(10)
             make.size.equalTo(20)
+        }
+    }
+    
+    func configureCell(row: Reminder) {
+        if row.isCompleted {
+            completeButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            completeButton.tintColor = .systemBlue
+        } else {
+            completeButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            completeButton.tintColor = .gray
+        }
+        
+        if let priority = row.priority {
+            titleLabel.text = priority + row.title
+        } else {
+            titleLabel.text = row.title
+        }
+        
+        notesLabel.text = row.notes
+
+        if let date = row.date, let tag = row.tag {
+            descriptionLabel.text = Utility.shared.dateFormatter(date: date) + (tag)
+        } else {
+            descriptionLabel.text = ""
+        }
+        
+        if row.flag {
+            flagImageView.isHidden = false
+        } else {
+            flagImageView.isHidden = true
         }
     }
 

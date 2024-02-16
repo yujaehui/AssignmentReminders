@@ -18,7 +18,6 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGroupedBackground
         setNavigationBar()
     }
     
@@ -80,7 +79,7 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
         guard let text = textField.text else { return false }
         if string == " " || string == "\n" {
             if tagListView.tagViews.count >= 10 {
-                view.makeToast("태그는 최대 10개까지만 가능합니다.", position: .center)
+                view.makeToast("태그는 최대 10개까지만 가능합니다", position: .center)
             } else if text.isEmpty == false {
                 tagListView.removeTag(text)
                 tagListView.insertTag(text, at: 0)
@@ -94,7 +93,7 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
             let newString = (text as NSString).replacingCharacters(in: range, with: string)
             let trimmedString = String(newString.prefix(9))
             textField.text = trimmedString
-            view.makeToast("태그는 10글자 이내로 작성해주세요.", position: .center)
+            view.makeToast("태그는 10글자 이내로 작성해주세요", position: .center)
         }
         return true
     }

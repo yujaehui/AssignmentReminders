@@ -1,5 +1,5 @@
 //
-//  Realm.swift
+//  Reminder.swift
 //  AssignmentReminders
 //
 //  Created by Jaehui Yu on 2/15/24.
@@ -7,21 +7,6 @@
 
 import Foundation
 import RealmSwift
-
-/*
- 정규화
- 
- PK
- 제목: Stirng
- 메모: Stirng?
- 날짜: Date?
- 태그: String?
- 깃발: Bool
- 중요도: Int?
- 진행 여부: Bool
- 마감 여부: Bool
- 생성일
- */
 
 class Reminder: Object {
     @Persisted(primaryKey: true) var id: ObjectId

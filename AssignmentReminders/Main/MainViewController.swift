@@ -47,6 +47,18 @@ enum MainCellType: String, CaseIterable {
     }
 }
 
+enum MainMenu: String, CaseIterable {
+    case EditLists = "Edit Lists"
+    case Templates
+    
+    var image: String {
+        switch self {
+        case .EditLists: return "pencil"
+        case .Templates: return "square.on.square"
+        }
+    }
+}
+
 class MainViewController: BaseViewController {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     let tableView = UITableView()
@@ -128,17 +140,12 @@ class MainViewController: BaseViewController {
     }
     
     func setMenu() -> UIMenu {
-        var items: [UIAction] {
-            let editLists = UIAction(title: "Edit Lists", image: UIImage(systemName: "pencil")) {  _ in
-                print("Edit Lists")
+        let actions = MainMenu.allCases.map { option in
+            UIAction(title: option.rawValue, image: UIImage(systemName: option.image)) { action in
+                print(option)
             }
-            let templates = UIAction(title: "Templates", image: UIImage(systemName: "square.on.square")) {  _ in
-                print("Templates")
-            }
-            let Items = [editLists, templates]
-            return Items
         }
-        let menu = UIMenu(children: items)
+        let menu = UIMenu(title: "", children: actions)
         return menu
     }
     

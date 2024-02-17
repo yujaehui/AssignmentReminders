@@ -9,6 +9,24 @@ import UIKit
 import SnapKit
 import RealmSwift
 
+enum ListMenu: String, CaseIterable {
+    case Manual
+    case DueDate = "Due Date"
+    case CreationDate = "Creation Date"
+    case Priority
+    case Title
+    
+    var byKeyPath: String {
+        switch self {
+        case .Manual: return "CreationDate"
+        case .DueDate: return "date"
+        case .CreationDate: return "CreationDate"
+        case .Priority: return "priority"
+        case .Title: return "title"
+        }
+    }
+}
+
 class ListViewController: BaseViewController {
     let listTableView = UITableView()
     let emptyLabel = UILabel()
@@ -18,6 +36,12 @@ class ListViewController: BaseViewController {
     
     var navigationTilte = ""
     var color: UIColor = .white
+    
+    var selectedOption: ListMenu = .Manual {
+        didSet {
+            setNavigationBar()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,27 +87,14 @@ class ListViewController: BaseViewController {
     }
     
     func setMenu() -> UIMenu {
-        var items: [UIAction] {
-            let deadline = UIAction(title: "마감일") { [self] _ in
-                reminderList = reminderList.sorted(byKeyPath: "date", ascending: true)
-                listTableView.reloadData()
+        let actions = ListMenu.allCases.map { option in
+            UIAction(title: option.rawValue, state: option == self.selectedOption ? .on : .off) { action in
+                self.selectedOption = option
+                self.reminderList = self.reminderList.sorted(byKeyPath: option.byKeyPath, ascending: true)
+                self.listTableView.reloadData()
             }
-            let date = UIAction(title: "생성일") { [self] _ in
-                reminderList = reminderList.sorted(byKeyPath: "CreationDate", ascending: true)
-                listTableView.reloadData()
-            }
-            let priority = UIAction(title: "우선 순위") { [self] _ in
-                reminderList = reminderList.sorted(byKeyPath: "priority", ascending: false)
-                listTableView.reloadData()
-            }
-            let title = UIAction(title: "제목") { [self] _ in
-                reminderList = reminderList.sorted(byKeyPath: "title", ascending: true)
-                listTableView.reloadData()
-            }
-            let Items = [deadline, date, priority, title]
-            return Items
         }
-        let menu = UIMenu(title: "다음으로 정렬", children: items)
+        let menu = UIMenu(title: "Sort By", subtitle: self.selectedOption.rawValue, children: actions)
         let mainMenu = UIMenu(title: "", children: [menu])
         return mainMenu
     }

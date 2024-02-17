@@ -111,7 +111,6 @@ class DetailViewController: BaseViewController {
     }
     
     @objc func dateSetting() {
-        print(#function)
         let vc = DateViewController()
         vc.date = { [self] value in
             date = value
@@ -195,6 +194,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: PriorityTableViewCell.identifier, for: indexPath) as! PriorityTableViewCell
                 cell.iconImageView.image = AdditionalCellType.Priority.image
                 cell.targetLabel.text = AdditionalCellType.Priority.rawValue
+                cell.settingLabel.text = PriorityMenu.None.rawValue
                 cell.priority = { value in
                     self.priority = value
                 }

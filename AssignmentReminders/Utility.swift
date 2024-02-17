@@ -5,7 +5,7 @@
 //  Created by Jaehui Yu on 2/16/24.
 //
 
-import Foundation
+import UIKit
 
 class Utility {
     static let shared = Utility()

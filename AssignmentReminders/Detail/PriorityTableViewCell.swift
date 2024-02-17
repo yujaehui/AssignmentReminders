@@ -7,6 +7,22 @@
 
 import UIKit
 
+enum PriorityMenu: String, CaseIterable {
+    case None
+    case Low
+    case Medium
+    case High
+    
+    var exclamationMark: String {
+        switch self {
+        case .None: return ""
+        case .Low: return "!"
+        case .Medium: return "!!"
+        case .High: return "!!!"
+        }
+    }
+}
+
 class PriorityTableViewCell: BaseTableViewCell {
     let iconImageView = UIImageView()
     let targetLabel = UILabel()
@@ -14,7 +30,12 @@ class PriorityTableViewCell: BaseTableViewCell {
     let settingButton = UIButton()
     
     var priority: ((String) -> Void)?
-
+    var selectedOption: PriorityMenu = .None {
+        didSet {
+            settingButtonClicked()
+        }
+    }
+    
     override func configureHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(targetLabel)
@@ -37,25 +58,14 @@ class PriorityTableViewCell: BaseTableViewCell {
     }
     
     func setMenu() -> UIMenu {
-        let noneButton = UIAction(title: "없음") { _ in
-            self.settingLabel.text = "없음"
-            self.priority?("")
+        let actions = PriorityMenu.allCases.map { option in
+            UIAction(title: option.rawValue, state: option == self.selectedOption ? .on : .off) { action in
+                self.selectedOption = option
+                self.settingLabel.text = option.rawValue
+                self.priority?(option.exclamationMark)
+            }
         }
-        let highButton = UIAction(title: "높음") { _ in
-            self.settingLabel.text = "높음"
-            self.priority?("!!!")
-        }
-        let middleButton = UIAction(title: "중간") { _ in
-            self.settingLabel.text = "중간"
-            self.priority?("!!")
-        }
-        let lowButton = UIAction(title: "낮음") { _ in
-            self.settingLabel.text = "낮음"
-            self.priority?("!")
-
-        }
-        let items = [noneButton, highButton, middleButton, lowButton]
-        let menu = UIMenu(title: "", children: items)
+        let menu = UIMenu(title: "", children: actions)
         return menu
     }
     
@@ -88,3 +98,13 @@ class PriorityTableViewCell: BaseTableViewCell {
     }
 }
 
+/*
+ menu 설정시 경험한 문제 = state가 변하지 않고 항상 초기값을 뜨는 문제
+ 원인은 버튼을 눌렀을 당시에 selector로 설정한 settingButtonClicked()가 딱 한 번만 실행됨!!! (print문으로 확인)
+ 난 당연히 버튼을 누를 때마다 실행되는 줄...
+ menu에 대한 설정도 이 메서드 안에서 처리하기 때문에 딱 한 번만 실행되는 것이었음
+ 그래서 아무리 값을 바꿔준다 해도 달라질 일이 없었던 것임
+ 
+ 이를 해결하기 위해서 state 변수인 selectedOption에 didSet으로 settingButtonClicked() 실행
+ selectedOption 값이 변할 때마다 저 메서드도 실행될 수 있도록!
+ */

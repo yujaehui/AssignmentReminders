@@ -14,6 +14,7 @@ class ListTableViewCell: BaseTableViewCell {
     let notesLabel = UILabel()
     let descriptionLabel = UILabel()
     let flagImageView = UIImageView()
+    let photoImageView = UIImageView()
     
     override func configureHierarchy() {
         contentView.addSubview(completeButton)
@@ -21,6 +22,7 @@ class ListTableViewCell: BaseTableViewCell {
         contentView.addSubview(notesLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(flagImageView)
+        contentView.addSubview(photoImageView)
     }
     
     override func configureView() {
@@ -30,6 +32,9 @@ class ListTableViewCell: BaseTableViewCell {
         descriptionLabel.font = .systemFont(ofSize: 14)
         flagImageView.image = UIImage(systemName: "flag.fill")
         flagImageView.tintColor = .systemOrange
+        photoImageView.layer.cornerRadius = 10
+        photoImageView.clipsToBounds = true
+
     }
     
     override func configureConstraints() {
@@ -51,13 +56,18 @@ class ListTableViewCell: BaseTableViewCell {
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(notesLabel.snp.bottom).offset(5)
             make.leading.equalTo(completeButton.snp.trailing).offset(10)
-            make.bottom.equalTo(contentView).inset(10)
         }
         
         flagImageView.snp.makeConstraints { make in
             make.centerY.equalTo(contentView)
             make.trailing.equalTo(contentView).inset(10)
             make.size.equalTo(20)
+        }
+        
+        photoImageView.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
+            make.leading.equalTo(completeButton.snp.trailing).offset(10)
+            make.bottom.equalTo(contentView).inset(10)
         }
     }
     
@@ -79,7 +89,7 @@ class ListTableViewCell: BaseTableViewCell {
         notesLabel.text = row.notes
 
         if let date = row.date, let tag = row.tag {
-            descriptionLabel.text = Utility.shared.dateFormatter(date: date) + (tag)
+            descriptionLabel.text = Utility.shared.dateFormatter(date: date) + " " + (tag)
         } else {
             descriptionLabel.text = ""
         }

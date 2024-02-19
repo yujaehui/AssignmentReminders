@@ -12,6 +12,7 @@ class ReminderRepository {
     let realm = try! Realm()
     
     func createItem(_ item: Reminder) {
+        print(realm.configuration.fileURL)
         do {
             try realm.write {
                 realm.add(item)

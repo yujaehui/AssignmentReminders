@@ -25,8 +25,9 @@ enum AdditionalCellType: String, CaseIterable {
     case Tag
     case Flag
     case Priority
+    case Image
     
-    var image: UIImage {
+    var image: UIImage? {
         switch self {
         case .Date:
             UIImage(systemName: "calendar.circle.fill")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
@@ -36,6 +37,8 @@ enum AdditionalCellType: String, CaseIterable {
             UIImage(systemName: "flag.circle.fill")!.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
         case .Priority:
             UIImage(systemName: "exclamationmark.circle.fill")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+        case .Image:
+            nil
         }
     }
 }
@@ -50,6 +53,11 @@ class DetailViewController: BaseViewController {
     var tag: String?
     var flag = false
     var priority: String?
+    var photoImage: UIImage? {
+        didSet {
+            detailTableView.reloadData()
+        }
+    }
     
     let repository = ReminderRepository()
     
@@ -71,6 +79,7 @@ class DetailViewController: BaseViewController {
         detailTableView.register(FlagTableViewCell.self, forCellReuseIdentifier: FlagTableViewCell.identifier)
         detailTableView.register(TagTableViewCell.self, forCellReuseIdentifier: TagTableViewCell.identifier)
         detailTableView.register(PriorityTableViewCell.self, forCellReuseIdentifier: PriorityTableViewCell.identifier)
+        detailTableView.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
         detailTableView.rowHeight = UITableView.automaticDimension
     }
     
@@ -96,6 +105,9 @@ class DetailViewController: BaseViewController {
         } else {
             let data = Reminder(title: listTitle, notes: listNotes, date: date, tag: tag, flag: flag, priority: priority, isCompleted: false, isClosed: nil, CreationDate: Date())
             repository.createItem(data)
+            if let image = photoImage {
+                saveImageToDocument(image: image, fileName: "\(data.id)")
+            }
             navigationController?.popViewController(animated: true)
         }
     }
@@ -125,6 +137,13 @@ class DetailViewController: BaseViewController {
         let vc = TagViewController()
         let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
+    }
+    
+    @objc func imageSetting() {
+        let vc = UIImagePickerController()
+        vc.allowsEditing = true
+        vc.delegate = self
+        present(vc, animated: true)
     }
 }
 
@@ -200,8 +219,27 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 cell.selectionStyle = .none
                 return cell
+            case .Image:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.identifier, for: indexPath) as! ImageTableViewCell
+                cell.targetLabel.text = AdditionalCellType.Image.rawValue
+                cell.settingImageView.image = photoImage
+                cell.settingButton.addTarget(self, action: #selector(imageSetting), for: .touchUpInside)
+                cell.selectionStyle = .none
+                return cell
             }
         }
     }
 }
 
+extension DetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            photoImage = pickedImage
+        }
+        dismiss(animated: true)
+    }
+}

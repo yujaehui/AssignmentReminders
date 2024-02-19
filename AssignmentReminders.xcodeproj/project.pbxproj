@@ -38,6 +38,8 @@
 		099F61422B7EF5A500330A8E /* ReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61412B7EF5A500330A8E /* ReminderRepository.swift */; };
 		099F61442B7FA74500330A8E /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61432B7FA74500330A8E /* Utility.swift */; };
 		099F61462B7FB6C000330A8E /* EssentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */; };
+		09BD9C942B8384EB0081CCA8 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9C932B8384EB0081CCA8 /* ImageTableViewCell.swift */; };
+		09BD9C962B8386790081CCA8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9C952B8386790081CCA8 /* FileManager+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		099F61412B7EF5A500330A8E /* ReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRepository.swift; sourceTree = "<group>"; };
 		099F61432B7FA74500330A8E /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialTableViewCell.swift; sourceTree = "<group>"; };
+		09BD9C932B8384EB0081CCA8 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		09BD9C952B8386790081CCA8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,7 @@
 				09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */,
 				099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */,
 				09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */,
+				09BD9C932B8384EB0081CCA8 /* ImageTableViewCell.swift */,
 				09535A142B7C951400CC8B3C /* DetailSetting */,
 			);
 			path = Detail;
@@ -161,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				09535A0E2B7C7C9C00CC8B3C /* UIView+Extension.swift */,
+				09BD9C952B8386790081CCA8 /* FileManager+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 				09535A0C2B7C776500CC8B3C /* BaseTableViewCell.swift in Sources */,
 				099F61352B7DFC0100330A8E /* FlagTableViewCell.swift in Sources */,
 				095359E82B7C712E00CC8B3C /* ViewController.swift in Sources */,
+				09BD9C942B8384EB0081CCA8 /* ImageTableViewCell.swift in Sources */,
 				09535A112B7C7EB500CC8B3C /* TagTableViewCell.swift in Sources */,
 				09535A252B7CF0E900CC8B3C /* ListTableViewCell.swift in Sources */,
 				095359E42B7C712E00CC8B3C /* AppDelegate.swift in Sources */,
@@ -294,6 +301,7 @@
 				095359F92B7C715F00CC8B3C /* ListViewController.swift in Sources */,
 				095359E62B7C712E00CC8B3C /* SceneDelegate.swift in Sources */,
 				09535A182B7CA2ED00CC8B3C /* TagViewController.swift in Sources */,
+				09BD9C962B8386790081CCA8 /* FileManager+Extension.swift in Sources */,
 				099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */,
 				099F61462B7FB6C000330A8E /* EssentialTableViewCell.swift in Sources */,
 				099F612E2B7DF52700330A8E /* Reminder.swift in Sources */,

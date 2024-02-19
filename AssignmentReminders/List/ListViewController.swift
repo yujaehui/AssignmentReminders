@@ -124,6 +124,12 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configureCell(row: row)
         cell.completeButton.tag = indexPath.row
         cell.completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
+        if loadImageToDocument(fileName: "\(row.id)") != nil {
+            cell.photoImageView.image = loadImageToDocument(fileName: "\(row.id)")
+            cell.photoImageView.snp.makeConstraints { make in
+                make.size.equalTo(30)
+            }
+        }
         cell.selectionStyle = .none
         return cell
     }

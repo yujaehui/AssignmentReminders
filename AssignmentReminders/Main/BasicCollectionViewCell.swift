@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainCollectionViewCell: BaseCollectionViewCell {
+class BasicCollectionViewCell: BaseCollectionViewCell {
     let iconimageView = UIImageView()
     let countLabel = UILabel()
     let titleLabel = UILabel()
@@ -44,7 +44,7 @@ class MainCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func configureCell(row: MainCellType) {
+    func configureCell(row: BasicCellType) {
         iconimageView.image = row.image
         iconimageView.tintColor = row.color
         titleLabel.text = row.rawValue

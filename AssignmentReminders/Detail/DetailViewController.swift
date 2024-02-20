@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 import Toast
+import PhotosUI
 
 enum SectionType: String, CaseIterable {
     case Essential
@@ -26,6 +27,7 @@ enum AdditionalCellType: String, CaseIterable {
     case Flag
     case Priority
     case Image
+    case List
     
     var image: UIImage? {
         switch self {
@@ -38,14 +40,22 @@ enum AdditionalCellType: String, CaseIterable {
         case .Priority:
             UIImage(systemName: "exclamationmark.circle.fill")!.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
         case .Image:
-            nil
+            UIImage(systemName: "photo.circle.fill")!.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+        case .List:
+            UIImage(systemName: "list.bullet.circle.fill")!.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
         }
     }
+}
+
+enum AccessType {
+    case Main
+    case List
 }
 
 class DetailViewController: BaseViewController {
     let detailTableView = UITableView(frame: .zero, style: .insetGrouped)
     
+    var folder: Folder!
     var listTitle = ""
     var listNotes: String?
     var date: Date?
@@ -59,12 +69,16 @@ class DetailViewController: BaseViewController {
         }
     }
     
+    let realm = try! Realm()
     let repository = ReminderRepository()
+    
+    var type: AccessType = .Main
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
         NotificationCenter.default.addObserver(self, selector: #selector(tagNotification), name: NSNotification.Name("Tag"), object: nil)
+        PHAsset.fetchAssets(with: nil)
     }
     
     override func configureHierarchy() {
@@ -80,6 +94,7 @@ class DetailViewController: BaseViewController {
         detailTableView.register(TagTableViewCell.self, forCellReuseIdentifier: TagTableViewCell.identifier)
         detailTableView.register(PriorityTableViewCell.self, forCellReuseIdentifier: PriorityTableViewCell.identifier)
         detailTableView.register(ImageTableViewCell.self, forCellReuseIdentifier: ImageTableViewCell.identifier)
+        detailTableView.register(DetailListTableViewCell.self, forCellReuseIdentifier: DetailListTableViewCell.identifier)
         detailTableView.rowHeight = UITableView.automaticDimension
     }
     
@@ -104,7 +119,13 @@ class DetailViewController: BaseViewController {
             view.makeToast("Title을 입력해주세요", position: .bottom)
         } else {
             let data = Reminder(title: listTitle, notes: listNotes, date: date, tag: tag, flag: flag, priority: priority, isCompleted: false, isClosed: nil, CreationDate: Date())
-            repository.createItem(data)
+            do {
+                try realm.write {
+                    folder.reminder.append(data)
+                }
+            } catch {
+                print(error)
+            }
             if let image = photoImage {
                 saveImageToDocument(image: image, fileName: "\(data.id)")
             }
@@ -140,9 +161,26 @@ class DetailViewController: BaseViewController {
     }
     
     @objc func imageSetting() {
-        let vc = UIImagePickerController()
-        vc.allowsEditing = true
-        vc.delegate = self
+//        let vc = UIImagePickerController()
+//        vc.allowsEditing = true
+//        vc.delegate = self
+//        present(vc, animated: true)
+        
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 3
+        configuration.filter = .any(of: [.images, .videos])
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    @objc func listSetting() {
+        print(#function)
+        let vc = DetailListViewController()
+        vc.list = { [self] value in
+            folder = value
+            detailTableView.reloadData()
+        }
         present(vc, animated: true)
     }
 }
@@ -221,10 +259,23 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
                 return cell
             case .Image:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ImageTableViewCell.identifier, for: indexPath) as! ImageTableViewCell
+                cell.iconImageView.image = AdditionalCellType.Image.image
                 cell.targetLabel.text = AdditionalCellType.Image.rawValue
                 cell.settingImageView.image = photoImage
                 cell.settingButton.addTarget(self, action: #selector(imageSetting), for: .touchUpInside)
                 cell.selectionStyle = .none
+                return cell
+            case .List:
+                let cell = tableView.dequeueReusableCell(withIdentifier: DetailListTableViewCell.identifier, for: indexPath) as! DetailListTableViewCell
+                cell.iconImageView.image = AdditionalCellType.List.image
+                cell.targetLabel.text = AdditionalCellType.List.rawValue
+                cell.settingLabel.text = folder?.folderName
+                cell.settingButton.addTarget(self, action: #selector(listSetting), for: .touchUpInside)
+                if type == .Main {
+                    cell.isHidden = false
+                } else {
+                    cell.isHidden = true
+                }
                 return cell
             }
         }
@@ -241,5 +292,19 @@ extension DetailViewController: UIImagePickerControllerDelegate, UINavigationCon
             photoImage = pickedImage
         }
         dismiss(animated: true)
+    }
+}
+
+extension DetailViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        let itemProvider = results.first?.itemProvider
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                DispatchQueue.main.async {
+                    self.photoImage = image as? UIImage
+                }
+            }
+        }
+        picker.dismiss(animated: true)
     }
 }

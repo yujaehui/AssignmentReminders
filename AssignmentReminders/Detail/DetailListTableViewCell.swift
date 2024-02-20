@@ -1,28 +1,29 @@
 //
-//  ImageTableViewCell.swift
+//  DetailListTableViewCell.swift
 //  AssignmentReminders
 //
-//  Created by Jaehui Yu on 2/19/24.
+//  Created by Jaehui Yu on 2/20/24.
 //
 
 import UIKit
 
-class ImageTableViewCell: BaseTableViewCell {
+class DetailListTableViewCell: BaseTableViewCell {
     let iconImageView = UIImageView()
     let targetLabel = UILabel()
-    let settingImageView = UIImageView()
+    let settingLabel = UILabel()
     let settingButton = UIButton()
     
     override func configureHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(targetLabel)
-        contentView.addSubview(settingImageView)
+        contentView.addSubview(settingLabel)
         contentView.addSubview(settingButton)
     }
     
     override func configureView() {
-        settingImageView.layer.cornerRadius = 10
-        settingImageView.clipsToBounds = true
+        settingLabel.textAlignment = .right
+        settingLabel.textColor = .systemBlue
+        settingLabel.font = .systemFont(ofSize: 15)
         settingButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         settingButton.contentHorizontalAlignment = .trailing
     }
@@ -41,11 +42,11 @@ class ImageTableViewCell: BaseTableViewCell {
             make.height.equalTo(30)
         }
         
-        settingImageView.snp.makeConstraints { make in
+        settingLabel.snp.makeConstraints { make in
             make.top.bottom.equalTo(contentView).inset(10)
             make.leading.equalTo(targetLabel.snp.trailing).offset(10)
             make.trailing.equalTo(contentView).inset(30)
-            make.size.equalTo(30)
+            make.height.equalTo(30)
         }
         
         settingButton.snp.makeConstraints { make in

@@ -19,6 +19,7 @@ class Reminder: Object {
     @Persisted var isCompleted: Bool
     @Persisted var isClosed: Bool?
     @Persisted var CreationDate: Date
+    @Persisted(originProperty: "reminder") var folder: LinkingObjects<Folder>
     
     convenience init(title: String, notes: String? = nil, date: Date? = nil, tag: String? = nil, flag: Bool, priority: String? = nil, isCompleted: Bool, isClosed: Bool? = nil, CreationDate: Date) {
         self.init()

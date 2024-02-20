@@ -31,11 +31,15 @@ class ListViewController: BaseViewController {
     let listTableView = UITableView()
     let emptyLabel = UILabel()
     
+    let realm = try! Realm()
     let repository = ReminderRepository()
+    var folder: Folder!
     var reminderList: Results<Reminder>!
     
     var navigationTilte = ""
     var color: UIColor = .white
+    
+    var type: MainSectionType = .Basic
     
     var selectedOption: ListMenu = .Manual {
         didSet {
@@ -47,6 +51,10 @@ class ListViewController: BaseViewController {
         super.viewDidLoad()
         setNavigationBar()
         view.backgroundColor = .white
+        if type == .MyLists {
+            reminderList = realm.objects(Reminder.self)
+            setToolBar()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,53 +111,119 @@ class ListViewController: BaseViewController {
         repository.updateIsCreated(index: sender.tag)
         listTableView.reloadData()
     }
+    
+    func setToolBar() {
+        navigationController?.isToolbarHidden = false
+        let addButton = UIBarButtonItem(title: "New Reminder", image: UIImage(systemName: "plus"), target: self, action: #selector(newReminderButtonClicked))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let barItems = [addButton, flexibleSpace]
+        self.toolbarItems = barItems
+    }
+    
+    @objc func newReminderButtonClicked() {
+        let vc = DetailViewController()
+        vc.type = .List
+        vc.folder = folder
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if reminderList.count > 0 {
-            emptyLabel.isHidden = true
-            tableView.isHidden = false
-            return reminderList.count
+        if type == .Basic {
+            if reminderList.count > 0 {
+                emptyLabel.isHidden = true
+                tableView.isHidden = false
+                return reminderList.count
+            } else {
+                emptyLabel.isHidden = false
+                tableView.isHidden = true
+                return 0
+            }
         } else {
-            emptyLabel.isHidden = false
-            tableView.isHidden = true
-            return 0
+            if reminderList.where({ $0.folder.id == folder.id }).count > 0 {
+                emptyLabel.isHidden = true
+                tableView.isHidden = false
+                return reminderList.where({ $0.folder.id == folder.id }).count
+            } else {
+                emptyLabel.isHidden = false
+                tableView.isHidden = true
+                return 0
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
-        let row = reminderList[indexPath.row]
-        cell.configureCell(row: row)
-        cell.completeButton.tag = indexPath.row
-        cell.completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
-        if loadImageToDocument(fileName: "\(row.id)") != nil {
-            cell.photoImageView.image = loadImageToDocument(fileName: "\(row.id)")
-            cell.photoImageView.snp.makeConstraints { make in
-                make.size.equalTo(30)
+        if type == .Basic {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
+            let row = reminderList[indexPath.row]
+            cell.configureCell(row: row)
+            cell.completeButton.tag = indexPath.row
+            cell.completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
+            if loadImageToDocument(fileName: "\(row.id)") != nil {
+                cell.photoImageView.image = loadImageToDocument(fileName: "\(row.id)")
+                cell.photoImageView.snp.makeConstraints { make in
+                    make.size.equalTo(30)
+                }
             }
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
+            let row = reminderList.where { $0.folder.id == folder.id }[indexPath.row]
+            cell.configureCell(row: row)
+            cell.completeButton.tag = indexPath.row
+            cell.completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
+            if loadImageToDocument(fileName: "\(row.id)") != nil {
+                cell.photoImageView.image = loadImageToDocument(fileName: "\(row.id)")
+                cell.photoImageView.snp.makeConstraints { make in
+                    make.size.equalTo(30)
+                }
+            }
+            cell.selectionStyle = .none
+            return cell
         }
-        cell.selectionStyle = .none
-        return cell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let title = reminderList[indexPath.row].flag ? "깃발 제거" : "깃발"
-        let flag = UIContextualAction(style: .normal, title: title) { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            self.repository.updateFlag(index: indexPath.row)
-            self.listTableView.reloadData()
-            success(true)
+        if type == .Basic {
+            let title = reminderList[indexPath.row].flag ? "깃발 제거" : "깃발"
+            let flag = UIContextualAction(style: .normal, title: title) { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+                self.repository.updateFlag(index: indexPath.row)
+                self.listTableView.reloadData()
+                success(true)
+            }
+            flag.backgroundColor = .systemOrange
+            
+            let delete = UIContextualAction(style: .normal, title: "삭제") { [self] (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+                let row = reminderList[indexPath.row]
+                removeImageFromDocument(fileName: "\(row.id)")
+                repository.deleteItem(list: reminderList, index: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                success(true)
+            }
+            delete.backgroundColor = .systemRed
+            
+            return UISwipeActionsConfiguration(actions:[delete, flag])
+        } else {
+            let title = reminderList.where { $0.folder.id == folder.id }[indexPath.row].flag ? "깃발 제거" : "깃발"
+            let flag = UIContextualAction(style: .normal, title: title) { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+                self.repository.updateFlag(index: indexPath.row)
+                self.listTableView.reloadData()
+                success(true)
+            }
+            flag.backgroundColor = .systemOrange
+            
+            let delete = UIContextualAction(style: .normal, title: "삭제") { [self] (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
+                let row = reminderList.where { $0.folder.id == folder.id }[indexPath.row]
+                removeImageFromDocument(fileName: "\(row.id)")
+                repository.deleteItem(list: reminderList.where { $0.folder.id == folder.id }, index: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                success(true)
+            }
+            delete.backgroundColor = .systemRed
+            
+            return UISwipeActionsConfiguration(actions:[delete, flag])
         }
-        flag.backgroundColor = .systemOrange
-        
-        let delete = UIContextualAction(style: .normal, title: "삭제") { (UIContextualAction, UIView, success: @escaping (Bool) -> Void) in
-            self.repository.deleteItem(list: self.reminderList, index: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            success(true)
-        }
-        delete.backgroundColor = .systemRed
-        
-        return UISwipeActionsConfiguration(actions:[delete, flag])
     }
 }

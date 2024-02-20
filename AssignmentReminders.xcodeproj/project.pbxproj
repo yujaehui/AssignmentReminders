@@ -33,13 +33,24 @@
 		099F61332B7DF59C00330A8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 099F61322B7DF59C00330A8E /* RealmSwift */; };
 		099F61352B7DFC0100330A8E /* FlagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */; };
 		099F61382B7E165B00330A8E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61372B7E165B00330A8E /* MainViewController.swift */; };
-		099F613C2B7E17D900330A8E /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */; };
+		099F613C2B7E17D900330A8E /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F613B2B7E17D900330A8E /* BasicCollectionViewCell.swift */; };
 		099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F613D2B7E17E800330A8E /* BaseCollectionViewCell.swift */; };
 		099F61422B7EF5A500330A8E /* ReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61412B7EF5A500330A8E /* ReminderRepository.swift */; };
 		099F61442B7FA74500330A8E /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61432B7FA74500330A8E /* Utility.swift */; };
 		099F61462B7FB6C000330A8E /* EssentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */; };
 		09BD9C942B8384EB0081CCA8 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9C932B8384EB0081CCA8 /* ImageTableViewCell.swift */; };
 		09BD9C962B8386790081CCA8 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9C952B8386790081CCA8 /* FileManager+Extension.swift */; };
+		09BD9C9A2B8446130081CCA8 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9C992B8446130081CCA8 /* Folder.swift */; };
+		09BD9CA22B845CF30081CCA8 /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CA12B845CF30081CCA8 /* FolderViewController.swift */; };
+		09BD9CA42B845D0B0081CCA8 /* FolderMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CA32B845D0B0081CCA8 /* FolderMainTableViewCell.swift */; };
+		09BD9CA62B847C280081CCA8 /* FolderColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CA52B847C280081CCA8 /* FolderColorTableViewCell.swift */; };
+		09BD9CA82B847D0F0081CCA8 /* FolderColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CA72B847D0F0081CCA8 /* FolderColorCollectionViewCell.swift */; };
+		09BD9CAE2B84B7020081CCA8 /* MyListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CAD2B84B7020081CCA8 /* MyListsCollectionViewCell.swift */; };
+		09BD9CB02B84C6180081CCA8 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CAF2B84C6180081CCA8 /* BasicTableViewCell.swift */; };
+		09BD9CB22B84C7300081CCA8 /* MyListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB12B84C7300081CCA8 /* MyListsTableViewCell.swift */; };
+		09BD9CB42B84E9E70081CCA8 /* DetailListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB32B84E9E70081CCA8 /* DetailListTableViewCell.swift */; };
+		09BD9CB62B84ECAC0081CCA8 /* DetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB52B84ECAC0081CCA8 /* DetailListViewController.swift */; };
+		09BD9CB82B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB72B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,13 +76,24 @@
 		099F612D2B7DF52700330A8E /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagTableViewCell.swift; sourceTree = "<group>"; };
 		099F61372B7E165B00330A8E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		099F613B2B7E17D900330A8E /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
 		099F613D2B7E17E800330A8E /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		099F61412B7EF5A500330A8E /* ReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderRepository.swift; sourceTree = "<group>"; };
 		099F61432B7FA74500330A8E /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialTableViewCell.swift; sourceTree = "<group>"; };
 		09BD9C932B8384EB0081CCA8 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		09BD9C952B8386790081CCA8 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		09BD9C992B8446130081CCA8 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		09BD9CA12B845CF30081CCA8 /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
+		09BD9CA32B845D0B0081CCA8 /* FolderMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderMainTableViewCell.swift; sourceTree = "<group>"; };
+		09BD9CA52B847C280081CCA8 /* FolderColorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderColorTableViewCell.swift; sourceTree = "<group>"; };
+		09BD9CA72B847D0F0081CCA8 /* FolderColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		09BD9CAD2B84B7020081CCA8 /* MyListsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsCollectionViewCell.swift; sourceTree = "<group>"; };
+		09BD9CAF2B84C6180081CCA8 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
+		09BD9CB12B84C7300081CCA8 /* MyListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsTableViewCell.swift; sourceTree = "<group>"; };
+		09BD9CB32B84E9E70081CCA8 /* DetailListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListTableViewCell.swift; sourceTree = "<group>"; };
+		09BD9CB52B84ECAC0081CCA8 /* DetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListViewController.swift; sourceTree = "<group>"; };
+		09BD9CB72B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailListsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +132,7 @@
 		095359E22B7C712E00CC8B3C /* AssignmentReminders */ = {
 			isa = PBXGroup;
 			children = (
+				09BD9CA02B845CE50081CCA8 /* Folder */,
 				099F61362B7E164F00330A8E /* Main */,
 				099F612C2B7DF51C00330A8E /* Realm */,
 				095359FD2B7C719300CC8B3C /* Base */,
@@ -147,6 +170,7 @@
 				099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */,
 				09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */,
 				09BD9C932B8384EB0081CCA8 /* ImageTableViewCell.swift */,
+				09BD9CB32B84E9E70081CCA8 /* DetailListTableViewCell.swift */,
 				09535A142B7C951400CC8B3C /* DetailSetting */,
 			);
 			path = Detail;
@@ -176,6 +200,8 @@
 			children = (
 				09535A152B7C952C00CC8B3C /* DateViewController.swift */,
 				09535A172B7CA2ED00CC8B3C /* TagViewController.swift */,
+				09BD9CB52B84ECAC0081CCA8 /* DetailListViewController.swift */,
+				09BD9CB72B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift */,
 			);
 			path = DetailSetting;
 			sourceTree = "<group>";
@@ -185,6 +211,7 @@
 			children = (
 				099F612D2B7DF52700330A8E /* Reminder.swift */,
 				099F61412B7EF5A500330A8E /* ReminderRepository.swift */,
+				09BD9C992B8446130081CCA8 /* Folder.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -193,9 +220,23 @@
 			isa = PBXGroup;
 			children = (
 				099F61372B7E165B00330A8E /* MainViewController.swift */,
-				099F613B2B7E17D900330A8E /* MainCollectionViewCell.swift */,
+				09BD9CAF2B84C6180081CCA8 /* BasicTableViewCell.swift */,
+				099F613B2B7E17D900330A8E /* BasicCollectionViewCell.swift */,
+				09BD9CB12B84C7300081CCA8 /* MyListsTableViewCell.swift */,
+				09BD9CAD2B84B7020081CCA8 /* MyListsCollectionViewCell.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		09BD9CA02B845CE50081CCA8 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				09BD9CA12B845CF30081CCA8 /* FolderViewController.swift */,
+				09BD9CA32B845D0B0081CCA8 /* FolderMainTableViewCell.swift */,
+				09BD9CA52B847C280081CCA8 /* FolderColorTableViewCell.swift */,
+				09BD9CA72B847D0F0081CCA8 /* FolderColorCollectionViewCell.swift */,
+			);
+			path = Folder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,26 +329,37 @@
 				099F61422B7EF5A500330A8E /* ReminderRepository.swift in Sources */,
 				099F61382B7E165B00330A8E /* MainViewController.swift in Sources */,
 				09535A0C2B7C776500CC8B3C /* BaseTableViewCell.swift in Sources */,
+				09BD9CAE2B84B7020081CCA8 /* MyListsCollectionViewCell.swift in Sources */,
 				099F61352B7DFC0100330A8E /* FlagTableViewCell.swift in Sources */,
 				095359E82B7C712E00CC8B3C /* ViewController.swift in Sources */,
+				09BD9C9A2B8446130081CCA8 /* Folder.swift in Sources */,
 				09BD9C942B8384EB0081CCA8 /* ImageTableViewCell.swift in Sources */,
 				09535A112B7C7EB500CC8B3C /* TagTableViewCell.swift in Sources */,
 				09535A252B7CF0E900CC8B3C /* ListTableViewCell.swift in Sources */,
+				09BD9CA82B847D0F0081CCA8 /* FolderColorCollectionViewCell.swift in Sources */,
 				095359E42B7C712E00CC8B3C /* AppDelegate.swift in Sources */,
+				09BD9CB22B84C7300081CCA8 /* MyListsTableViewCell.swift in Sources */,
 				099F61442B7FA74500330A8E /* Utility.swift in Sources */,
+				09BD9CB82B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift in Sources */,
 				09535A0F2B7C7C9C00CC8B3C /* UIView+Extension.swift in Sources */,
+				09BD9CB42B84E9E70081CCA8 /* DetailListTableViewCell.swift in Sources */,
 				09535A1F2B7CCD9100CC8B3C /* PriorityTableViewCell.swift in Sources */,
 				095359FC2B7C717600CC8B3C /* DetailViewController.swift in Sources */,
 				095359F92B7C715F00CC8B3C /* ListViewController.swift in Sources */,
+				09BD9CB02B84C6180081CCA8 /* BasicTableViewCell.swift in Sources */,
 				095359E62B7C712E00CC8B3C /* SceneDelegate.swift in Sources */,
 				09535A182B7CA2ED00CC8B3C /* TagViewController.swift in Sources */,
 				09BD9C962B8386790081CCA8 /* FileManager+Extension.swift in Sources */,
 				099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */,
+				09BD9CA22B845CF30081CCA8 /* FolderViewController.swift in Sources */,
 				099F61462B7FB6C000330A8E /* EssentialTableViewCell.swift in Sources */,
+				09BD9CA42B845D0B0081CCA8 /* FolderMainTableViewCell.swift in Sources */,
 				099F612E2B7DF52700330A8E /* Reminder.swift in Sources */,
-				099F613C2B7E17D900330A8E /* MainCollectionViewCell.swift in Sources */,
+				09BD9CB62B84ECAC0081CCA8 /* DetailListViewController.swift in Sources */,
+				099F613C2B7E17D900330A8E /* BasicCollectionViewCell.swift in Sources */,
 				095359FF2B7C719A00CC8B3C /* BaseViewController.swift in Sources */,
 				09535A162B7C952C00CC8B3C /* DateViewController.swift in Sources */,
+				09BD9CA62B847C280081CCA8 /* FolderColorTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

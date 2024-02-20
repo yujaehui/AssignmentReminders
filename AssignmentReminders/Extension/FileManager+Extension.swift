@@ -28,4 +28,18 @@ extension UIViewController {
             return nil
         }
     }
+    
+    func removeImageFromDocument(fileName: String) {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileURL = documentDirectory.appendingPathComponent("\(fileName).jpg")
+        if FileManager.default.fileExists(atPath: fileURL.path()) {
+            do {
+                try FileManager.default.removeItem(atPath: fileURL.path())
+            } catch {
+                print(error)
+            }
+        } else {
+            print("file not exist, remove error")
+        }
+    }
 }

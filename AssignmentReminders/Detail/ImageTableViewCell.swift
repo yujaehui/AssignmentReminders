@@ -8,11 +8,20 @@
 import UIKit
 
 class ImageTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     let iconImageView = UIImageView()
     let targetLabel = UILabel()
     let settingImageView = UIImageView()
     let settingButton = UIButton()
+    var buttonAction: (() -> Void)?
     
+    // MARK: - pprepareForReuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        buttonAction = nil
+    }
+
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(targetLabel)
@@ -25,6 +34,11 @@ class ImageTableViewCell: BaseTableViewCell {
         settingImageView.clipsToBounds = true
         settingButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         settingButton.contentHorizontalAlignment = .trailing
+        settingButton.addTarget(self, action: #selector(settingButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func settingButtonClicked() {
+        buttonAction?()
     }
     
     override func configureConstraints() {

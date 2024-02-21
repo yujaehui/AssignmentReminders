@@ -9,13 +9,23 @@ import UIKit
 import SnapKit
 
 class ListTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     let completeButton = UIButton()
     let titleLabel = UILabel()
     let notesLabel = UILabel()
     let descriptionLabel = UILabel()
     let flagImageView = UIImageView()
     let photoImageView = UIImageView()
+    var buttonAction: (() -> Void)?
     
+    // MARK: - prepaareForReuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        buttonAction = nil
+        photoImageView.image = nil
+    }
+    
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(completeButton)
         contentView.addSubview(titleLabel)
@@ -26,6 +36,7 @@ class ListTableViewCell: BaseTableViewCell {
     }
     
     override func configureView() {
+        completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
         notesLabel.textColor = .gray
         notesLabel.font = .systemFont(ofSize: 14)
         descriptionLabel.textColor = .gray
@@ -35,6 +46,10 @@ class ListTableViewCell: BaseTableViewCell {
         photoImageView.layer.cornerRadius = 10
         photoImageView.clipsToBounds = true
 
+    }
+    
+    @objc func completeButtonClicked() {
+        buttonAction?()
     }
     
     override func configureConstraints() {
@@ -68,6 +83,7 @@ class ListTableViewCell: BaseTableViewCell {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
             make.leading.equalTo(completeButton.snp.trailing).offset(10)
             make.bottom.equalTo(contentView).inset(10)
+            make.size.equalTo(30)
         }
     }
     
@@ -100,5 +116,4 @@ class ListTableViewCell: BaseTableViewCell {
             flagImageView.isHidden = true
         }
     }
-
 }

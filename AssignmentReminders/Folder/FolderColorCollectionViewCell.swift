@@ -9,22 +9,19 @@ import UIKit
 import SnapKit
 
 class FolderColorCollectionViewCell: BaseCollectionViewCell {
+    // MARK: - Properties
     let colorImageView = UIImageView()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        colorImageView.clipsToBounds = true
-        colorImageView.layer.cornerRadius = 20
-        
-    }
-    
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(colorImageView)
     }
     
     override func configureView() {
+        colorImageView.clipsToBounds = true
+        colorImageView.layer.cornerRadius = 20
     }
-    
+        
     override func configureConstraints() {
         colorImageView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)

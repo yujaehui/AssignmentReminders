@@ -9,10 +9,12 @@ import UIKit
 import SnapKit
 
 class BasicCollectionViewCell: BaseCollectionViewCell {
+    // MARK: - Properties
     let iconimageView = UIImageView()
     let countLabel = UILabel()
     let titleLabel = UILabel()
     
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(iconimageView)
         contentView.addSubview(countLabel)
@@ -44,9 +46,9 @@ class BasicCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func configureCell(row: BasicCellType) {
-        iconimageView.image = row.image
-        iconimageView.tintColor = row.color
-        titleLabel.text = row.rawValue
+    func configureCell(cell: BasicCellType) {
+        iconimageView.image = cell.image
+        iconimageView.tintColor = cell.color
+        titleLabel.text = cell.rawValue
     }
 }

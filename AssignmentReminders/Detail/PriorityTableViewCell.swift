@@ -24,11 +24,11 @@ enum PriorityMenu: String, CaseIterable {
 }
 
 class PriorityTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     let iconImageView = UIImageView()
     let targetLabel = UILabel()
     let settingLabel = UILabel()
     let settingButton = UIButton()
-    
     var priority: ((String) -> Void)?
     var selectedOption: PriorityMenu = .None {
         didSet {
@@ -36,6 +36,7 @@ class PriorityTableViewCell: BaseTableViewCell {
         }
     }
     
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(targetLabel)

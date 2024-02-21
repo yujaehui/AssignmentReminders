@@ -10,15 +10,17 @@ import RealmSwift
 
 class Folder: Object {
     @Persisted(primaryKey: true) var id: ObjectId
-    @Persisted var folderName: String
-    @Persisted var folderColor: Int
+    @Persisted var isFood: Bool
+    @Persisted var name: String
+    @Persisted var color: Int
     @Persisted var regDate: Date
     @Persisted var reminder: List<Reminder>
     
     convenience init(folderName: String, folderColor: Int, regDate: Date) {
         self.init()
-        self.folderName = folderName
-        self.folderColor = folderColor
+        self.isFood = false
+        self.name = folderName
+        self.color = folderColor
         self.regDate = regDate
     }
 }

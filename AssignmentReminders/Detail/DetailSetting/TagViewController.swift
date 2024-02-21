@@ -10,17 +10,19 @@ import SnapKit
 import TagListView
 import Toast
 
-class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDelegate {
+class TagViewController: BaseViewController {
+    // MARK: - Properties
     let tagListView = TagListView()
     let tagTextField = UITextField()
-    
     var tagList: [String] = []
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
     }
     
+    // MARK: - configure
     override func configureHierarchy() {
         view.addSubview(tagListView)
         view.addSubview(tagTextField)
@@ -54,7 +56,10 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
             make.height.equalTo(200)
         }
     }
-    
+}
+
+// MARK: - Navigation
+extension TagViewController {
     func setNavigationBar() {
         navigationItem.title = "Tag"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(leftBarButtonClicked))
@@ -74,7 +79,10 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
         NotificationCenter.default.post(name: NSNotification.Name("Tag"), object: nil, userInfo: ["tagList":tagList])
         dismiss(animated: true)
     }
-    
+}
+
+// MARK: - UITextFieldDelegate
+extension TagViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return false }
         if string == " " || string == "\n" {
@@ -97,7 +105,10 @@ class TagViewController: BaseViewController, UITextFieldDelegate, TagListViewDel
         }
         return true
     }
-    
+}
+
+// MARK: - TagListViewDelegate
+extension TagViewController: TagListViewDelegate {
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         sender.removeTag(title)
         if tagListView.tagViews.count == 0 {

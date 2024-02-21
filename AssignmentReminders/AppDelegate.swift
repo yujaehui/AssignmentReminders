@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +14,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let configuration = Realm.Configuration(schemaVersion: 3) { migration, oldSchemaVersion in
+            
+            if oldSchemaVersion < 1 {
+                // 폴더에 folderName 프로퍼티 변수명 변경 -> name
+                migration.renameProperty(onType: Folder.className(), from: "folderName", to: "name")
+            }
+            
+            if oldSchemaVersion < 2 {
+                // 폴더에 folderColor 프로퍼티 변수명 변경 -> color
+                migration.renameProperty(onType: Folder.className(), from: "folderColor", to: "color")
+            }
+            
+            if oldSchemaVersion < 3 {
+                // 폴더에 isFood 프로퍼티 추가
+            }
+        }
+        Realm.Configuration.defaultConfiguration = configuration
         return true
     }
 

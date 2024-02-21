@@ -8,12 +8,13 @@
 import UIKit
 
 class FlagTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     let iconImageView = UIImageView()
     let targetLabel = UILabel()
     let flagSwitch = UISwitch()
-    
     var flag: ((Bool) -> Void)?
 
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(targetLabel)

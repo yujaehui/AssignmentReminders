@@ -50,30 +50,30 @@ class ReminderRepository {
         return realm.objects(Reminder.self).where { $0.title.contains(text, options: .caseInsensitive) }
     }
     
-    func updateIsCreated(index: Int) {
+    func updateIsCompleted(id: ObjectId) {
         do {
             try realm.write {
-                realm.objects(Reminder.self)[index].isCompleted.toggle()
+                realm.objects(Reminder.self).where{ $0.id == id }.first?.isCompleted.toggle()
             }
         } catch {
             print(error)
         }
     }
     
-    func updateFlag(index: Int) {
+    func updateFlag(id: ObjectId) {
         do {
             try realm.write {
-                realm.objects(Reminder.self)[index].flag.toggle()
+                realm.objects(Reminder.self).where{$0.id == id}.first?.flag.toggle()
             }
         } catch {
             print(error)
         }
     }
     
-    func deleteItem(list: Results<Reminder>, index: Int) {
+    func deleteItem(list: Results<Reminder>, id: ObjectId) {
         do {
             try realm.write{
-                realm.delete(list[index])
+                realm.delete(list.where{ $0.id == id })
             }
         } catch {
             print(error)

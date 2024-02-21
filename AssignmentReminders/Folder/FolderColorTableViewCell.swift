@@ -41,6 +41,7 @@ enum FolderColor: Int, CaseIterable {
 }
 
 class FolderColorTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     let colorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     var userSelect = 0 {
         didSet {
@@ -49,17 +50,7 @@ class FolderColorTableViewCell: BaseTableViewCell {
     }
     var folderColor: ((Int) -> Void)?
     
-    private static func configureCollectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 16
-        let cellWidth = UIScreen.main.bounds.width - (spacing * 7)
-        layout.itemSize = CGSize(width: cellWidth / 7, height: cellWidth / 7)
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        return layout
-    }
-    
+    // MARK:  - configrue
     override func configureHierarchy() {
         contentView.addSubview(colorCollectionView)
     }
@@ -78,17 +69,30 @@ class FolderColorTableViewCell: BaseTableViewCell {
     }
 }
 
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension FolderColorTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    private static func configureCollectionViewLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = 16
+        let cellWidth = UIScreen.main.bounds.width - (spacing * 7)
+        layout.itemSize = CGSize(width: cellWidth / 7, height: cellWidth / 7)
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        return layout
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return FolderColor.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FolderColorCollectionViewCell.identifier, for: indexPath) as! FolderColorCollectionViewCell
-        cell.colorImageView.backgroundColor = FolderColor.allCases[indexPath.row].color
+        let row = indexPath.row
+        cell.colorImageView.backgroundColor = FolderColor.allCases[row].color
         if userSelect != indexPath.row {
             cell.colorImageView.layer.borderWidth = 0
-        } else {
+        } else { // 내가 고른 컬러 항목일 경우 boreder 효과
             cell.colorImageView.layer.borderWidth = 4
             cell.colorImageView.layer.borderColor = UIColor.gray.cgColor
         }
@@ -96,9 +100,9 @@ extension FolderColorTableViewCell: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-        userSelect = indexPath.row
-        folderColor?(indexPath.row)
+        let row = indexPath.row
+        userSelect = row // 내가 고른 항목이 뭔지 알기 위해서
+        folderColor?(row) // FolderViewController로 값 전달
         
     }
     

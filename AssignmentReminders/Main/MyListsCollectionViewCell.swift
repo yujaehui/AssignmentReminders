@@ -8,11 +8,13 @@
 import UIKit
 
 class MyListsCollectionViewCell: BaseCollectionViewCell {
+    // MARK: - Properties
     let folderImageView = UIImageView()
     let folderNameLabel = UILabel()
     let listCountLabel = UILabel()
     let goListButton = UIButton()
     
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(folderImageView)
         contentView.addSubview(folderNameLabel)
@@ -22,8 +24,6 @@ class MyListsCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         folderImageView.image = UIImage(systemName: "list.bullet.circle.fill")
-        folderNameLabel.text = "Reminders"
-        listCountLabel.text = "0"
         listCountLabel.textAlignment = .right
         goListButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         goListButton.contentHorizontalAlignment = .trailing

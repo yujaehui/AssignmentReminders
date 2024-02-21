@@ -9,10 +9,12 @@ import UIKit
 import SnapKit
 
 class FolderMainTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     let folderImageView = UIImageView()
     let folderNameTextField = UITextField()
     var folderName: ((String) -> Void)?
     
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(folderImageView)
         contentView.addSubview(folderNameTextField)
@@ -24,8 +26,8 @@ class FolderMainTableViewCell: BaseTableViewCell {
         folderNameTextField.placeholder = "List Name"
         folderNameTextField.textAlignment = .center
         folderNameTextField.backgroundColor = .systemGroupedBackground
-        folderNameTextField.layer.cornerRadius = 10
         folderNameTextField.clipsToBounds = true
+        folderNameTextField.layer.cornerRadius = 10
         folderNameTextField.clearButtonMode = .whileEditing
         if let clearButton = folderNameTextField.value(forKey: "_clearButton") as? UIButton {
             let templateImage = clearButton.imageView?.image?.withRenderingMode(.automatic)
@@ -54,5 +56,4 @@ class FolderMainTableViewCell: BaseTableViewCell {
         guard let text = folderNameTextField.text else { return }
         folderName?(text)
     }
-
 }

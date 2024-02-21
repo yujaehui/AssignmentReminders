@@ -1,5 +1,5 @@
 //
-//  TagTableViewCell.swift
+//  DateTableViewCell.swift
 //  AssignmentReminders
 //
 //  Created by Jaehui Yu on 2/14/24.
@@ -7,12 +7,21 @@
 
 import UIKit
 
-class TagTableViewCell: BaseTableViewCell {
+class AdditionalTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     let iconImageView = UIImageView()
     let targetLabel = UILabel()
     let settingLabel = UILabel()
     let settingButton = UIButton()
+    var buttonAction: (() -> Void)?
     
+    // MARK: - prepareForReuse
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        buttonAction = nil
+    }
+    
+    // MARK: configure
     override func configureHierarchy() {
         contentView.addSubview(iconImageView)
         contentView.addSubview(targetLabel)
@@ -21,11 +30,17 @@ class TagTableViewCell: BaseTableViewCell {
     }
     
     override func configureView() {
+        selectionStyle = .none
         settingLabel.textAlignment = .right
         settingLabel.textColor = .systemBlue
         settingLabel.font = .systemFont(ofSize: 15)
         settingButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
         settingButton.contentHorizontalAlignment = .trailing
+        settingButton.addTarget(self, action: #selector(settingButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func settingButtonClicked() {
+        buttonAction?()
     }
     
     override func configureConstraints() {

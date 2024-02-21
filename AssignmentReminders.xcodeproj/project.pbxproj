@@ -21,13 +21,13 @@
 		09535A082B7C723000CC8B3C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 09535A072B7C723000CC8B3C /* SnapKit */; };
 		09535A0C2B7C776500CC8B3C /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A0B2B7C776500CC8B3C /* BaseTableViewCell.swift */; };
 		09535A0F2B7C7C9C00CC8B3C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A0E2B7C7C9C00CC8B3C /* UIView+Extension.swift */; };
-		09535A112B7C7EB500CC8B3C /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */; };
 		09535A162B7C952C00CC8B3C /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A152B7C952C00CC8B3C /* DateViewController.swift */; };
 		09535A182B7CA2ED00CC8B3C /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A172B7CA2ED00CC8B3C /* TagViewController.swift */; };
 		09535A1D2B7CBBD500CC8B3C /* TagListView in Frameworks */ = {isa = PBXBuildFile; productRef = 09535A1C2B7CBBD500CC8B3C /* TagListView */; };
 		09535A1F2B7CCD9100CC8B3C /* PriorityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */; };
-		09535A212B7CEEA200CC8B3C /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A202B7CEEA200CC8B3C /* DateTableViewCell.swift */; };
 		09535A252B7CF0E900CC8B3C /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09535A242B7CF0E900CC8B3C /* ListTableViewCell.swift */; };
+		096207D72B858AC000A563FD /* FolderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096207D62B858AC000A563FD /* FolderRepository.swift */; };
+		096207E22B85F69200A563FD /* AdditionalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096207E12B85F69200A563FD /* AdditionalTableViewCell.swift */; };
 		099F612E2B7DF52700330A8E /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099F612D2B7DF52700330A8E /* Reminder.swift */; };
 		099F61312B7DF59C00330A8E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 099F61302B7DF59C00330A8E /* Realm */; };
 		099F61332B7DF59C00330A8E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 099F61322B7DF59C00330A8E /* RealmSwift */; };
@@ -48,7 +48,6 @@
 		09BD9CAE2B84B7020081CCA8 /* MyListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CAD2B84B7020081CCA8 /* MyListsCollectionViewCell.swift */; };
 		09BD9CB02B84C6180081CCA8 /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CAF2B84C6180081CCA8 /* BasicTableViewCell.swift */; };
 		09BD9CB22B84C7300081CCA8 /* MyListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB12B84C7300081CCA8 /* MyListsTableViewCell.swift */; };
-		09BD9CB42B84E9E70081CCA8 /* DetailListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB32B84E9E70081CCA8 /* DetailListTableViewCell.swift */; };
 		09BD9CB62B84ECAC0081CCA8 /* DetailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB52B84ECAC0081CCA8 /* DetailListViewController.swift */; };
 		09BD9CB82B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BD9CB72B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -67,12 +66,12 @@
 		095359FE2B7C719A00CC8B3C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		09535A0B2B7C776500CC8B3C /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		09535A0E2B7C7C9C00CC8B3C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		09535A152B7C952C00CC8B3C /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		09535A172B7CA2ED00CC8B3C /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityTableViewCell.swift; sourceTree = "<group>"; };
-		09535A202B7CEEA200CC8B3C /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		09535A242B7CF0E900CC8B3C /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		096207D62B858AC000A563FD /* FolderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRepository.swift; sourceTree = "<group>"; };
+		096207E12B85F69200A563FD /* AdditionalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalTableViewCell.swift; sourceTree = "<group>"; };
 		099F612D2B7DF52700330A8E /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagTableViewCell.swift; sourceTree = "<group>"; };
 		099F61372B7E165B00330A8E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +90,6 @@
 		09BD9CAD2B84B7020081CCA8 /* MyListsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsCollectionViewCell.swift; sourceTree = "<group>"; };
 		09BD9CAF2B84C6180081CCA8 /* BasicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		09BD9CB12B84C7300081CCA8 /* MyListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsTableViewCell.swift; sourceTree = "<group>"; };
-		09BD9CB32B84E9E70081CCA8 /* DetailListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListTableViewCell.swift; sourceTree = "<group>"; };
 		09BD9CB52B84ECAC0081CCA8 /* DetailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListViewController.swift; sourceTree = "<group>"; };
 		09BD9CB72B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailListsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,11 +130,11 @@
 		095359E22B7C712E00CC8B3C /* AssignmentReminders */ = {
 			isa = PBXGroup;
 			children = (
-				09BD9CA02B845CE50081CCA8 /* Folder */,
-				099F61362B7E164F00330A8E /* Main */,
-				099F612C2B7DF51C00330A8E /* Realm */,
 				095359FD2B7C719300CC8B3C /* Base */,
+				099F612C2B7DF51C00330A8E /* Realm */,
+				099F61362B7E164F00330A8E /* Main */,
 				095359F72B7C713400CC8B3C /* List */,
+				09BD9CA02B845CE50081CCA8 /* Folder */,
 				095359FA2B7C716D00CC8B3C /* Detail */,
 				09535A0D2B7C7C9000CC8B3C /* Extension */,
 				095359E32B7C712E00CC8B3C /* AppDelegate.swift */,
@@ -165,12 +163,10 @@
 			children = (
 				095359FB2B7C717600CC8B3C /* DetailViewController.swift */,
 				099F61452B7FB6C000330A8E /* EssentialTableViewCell.swift */,
-				09535A202B7CEEA200CC8B3C /* DateTableViewCell.swift */,
-				09535A102B7C7EB500CC8B3C /* TagTableViewCell.swift */,
+				096207E12B85F69200A563FD /* AdditionalTableViewCell.swift */,
 				099F61342B7DFC0100330A8E /* FlagTableViewCell.swift */,
 				09535A1E2B7CCD9100CC8B3C /* PriorityTableViewCell.swift */,
 				09BD9C932B8384EB0081CCA8 /* ImageTableViewCell.swift */,
-				09BD9CB32B84E9E70081CCA8 /* DetailListTableViewCell.swift */,
 				09535A142B7C951400CC8B3C /* DetailSetting */,
 			);
 			path = Detail;
@@ -212,6 +208,7 @@
 				099F612D2B7DF52700330A8E /* Reminder.swift */,
 				099F61412B7EF5A500330A8E /* ReminderRepository.swift */,
 				09BD9C992B8446130081CCA8 /* Folder.swift */,
+				096207D62B858AC000A563FD /* FolderRepository.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -325,7 +322,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09535A212B7CEEA200CC8B3C /* DateTableViewCell.swift in Sources */,
 				099F61422B7EF5A500330A8E /* ReminderRepository.swift in Sources */,
 				099F61382B7E165B00330A8E /* MainViewController.swift in Sources */,
 				09535A0C2B7C776500CC8B3C /* BaseTableViewCell.swift in Sources */,
@@ -334,21 +330,21 @@
 				095359E82B7C712E00CC8B3C /* ViewController.swift in Sources */,
 				09BD9C9A2B8446130081CCA8 /* Folder.swift in Sources */,
 				09BD9C942B8384EB0081CCA8 /* ImageTableViewCell.swift in Sources */,
-				09535A112B7C7EB500CC8B3C /* TagTableViewCell.swift in Sources */,
 				09535A252B7CF0E900CC8B3C /* ListTableViewCell.swift in Sources */,
 				09BD9CA82B847D0F0081CCA8 /* FolderColorCollectionViewCell.swift in Sources */,
 				095359E42B7C712E00CC8B3C /* AppDelegate.swift in Sources */,
+				096207D72B858AC000A563FD /* FolderRepository.swift in Sources */,
 				09BD9CB22B84C7300081CCA8 /* MyListsTableViewCell.swift in Sources */,
 				099F61442B7FA74500330A8E /* Utility.swift in Sources */,
 				09BD9CB82B84F96B0081CCA8 /* MyDetailListsTableViewCell.swift in Sources */,
 				09535A0F2B7C7C9C00CC8B3C /* UIView+Extension.swift in Sources */,
-				09BD9CB42B84E9E70081CCA8 /* DetailListTableViewCell.swift in Sources */,
 				09535A1F2B7CCD9100CC8B3C /* PriorityTableViewCell.swift in Sources */,
 				095359FC2B7C717600CC8B3C /* DetailViewController.swift in Sources */,
 				095359F92B7C715F00CC8B3C /* ListViewController.swift in Sources */,
 				09BD9CB02B84C6180081CCA8 /* BasicTableViewCell.swift in Sources */,
 				095359E62B7C712E00CC8B3C /* SceneDelegate.swift in Sources */,
 				09535A182B7CA2ED00CC8B3C /* TagViewController.swift in Sources */,
+				096207E22B85F69200A563FD /* AdditionalTableViewCell.swift in Sources */,
 				09BD9C962B8386790081CCA8 /* FileManager+Extension.swift in Sources */,
 				099F613E2B7E17E800330A8E /* BaseCollectionViewCell.swift in Sources */,
 				09BD9CA22B845CF30081CCA8 /* FolderViewController.swift in Sources */,

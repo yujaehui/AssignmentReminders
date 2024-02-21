@@ -10,21 +10,27 @@ import SnapKit
 import RealmSwift
 
 class DetailListViewController: BaseViewController {
+    // MARK: - Properties
     let tableView = UITableView()
-    let realm = try! Realm()
-    var folder: Results<Folder>!
+    var folderRepository = FolderRepository()
+    var folderList: Results<Folder>!
+    var folder: Folder!
     var list: ((Folder) -> Void)?
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        folder = realm.objects(Folder.self)
+        setNavigationBar()
+        folderList = folderRepository.fetchAllFolder()
     }
     
+    // MARK: - configure
     override func configureHierarchy() {
         view.addSubview(tableView)
     }
     
     override func configureView() {
+        tableView.backgroundColor = .systemGroupedBackground
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(MyDetailListsTableViewCell.self, forCellReuseIdentifier: MyDetailListsTableViewCell.identifier)
@@ -35,25 +41,39 @@ class DetailListViewController: BaseViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-
 }
 
+// MARK: - Naviagtion
+extension DetailListViewController {
+    func setNavigationBar() {
+        navigationItem.title = "목록"
+    }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension DetailListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return folder.count
+        return folderList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyDetailListsTableViewCell.identifier, for: indexPath) as! MyDetailListsTableViewCell
-        let row = folder[indexPath.row]
-        cell.iconImageView.tintColor = FolderColor.allCases[row.folderColor].color
-        cell.targetLabel.text = folder[indexPath.row].folderName
+        let row = indexPath.row
+        let currentCell = folderList[row]
+        cell.iconImageView.tintColor = FolderColor.allCases[currentCell.color].color
+        cell.targetLabel.text = folderList[row].name
+        if folder.id == currentCell.id {
+            cell.checkImaggeView.isHidden = false
+        } else {
+            cell.checkImaggeView.isHidden = true
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        list?(folder[indexPath.row])
-        dismiss(animated: true)
+        let row = indexPath.row
+        list?(folderList[row])
+        navigationController?.popViewController(animated: true)
     }
     
     

@@ -14,11 +14,16 @@ protocol BasicTableViewCellDelegate: AnyObject {
 }
 
 class BasicTableViewCell: BaseTableViewCell {
+    // MARK: - Properties
     weak var delegate: BasicTableViewCellDelegate?
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
-    var mainReminderList: [Results<Reminder>?] = []
-    var reminderCountList: [Int] = []
+    var mainReminderList: [Results<Reminder>?] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
+    // MARK: - configure
     override func configureHierarchy() {
         contentView.addSubview(collectionView)
     }
@@ -39,6 +44,7 @@ class BasicTableViewCell: BaseTableViewCell {
     }
 }
 
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension BasicTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate {
     private static func configureCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
@@ -57,9 +63,10 @@ extension BasicTableViewCell: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BasicCollectionViewCell.identifier, for: indexPath) as! BasicCollectionViewCell
-        let row = BasicCellType.allCases[indexPath.row]
-        cell.configureCell(row: row)
-        cell.countLabel.text = "\(reminderCountList[indexPath.row])"
+        let row = indexPath.row
+        let currentCell = BasicCellType.allCases[row]
+        cell.configureCell(cell: currentCell)
+        cell.countLabel.text = "\(mainReminderList[row]?.count ?? 0)"
         return cell
     }
     
